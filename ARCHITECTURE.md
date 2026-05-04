@@ -258,6 +258,15 @@ LLM 분석 (5페이지 배치 단위):
   └── 데이터 공백: 중요하지만 누락된 정보
 
 결과: wiki/lint_2026-05-02.md 리포트 저장
+
+**Post-Lint 후속 조치** (run_lint 완료 직후 자동 실행):
+
+| 이슈 | 조치 |
+|------|------|
+| `broken_links` | 사용자 확인 → plan에 신규 페이지 추가 → run_generate → run_link |
+| `missing_backlinks` | 사용자 확인 → 해당 페이지 `linked=False` 리셋 → run_link |
+| `contradictions` | 사용자 확인 → 해당 페이지 `generated=False`/`linked=False` 리셋 → run_generate → run_link |
+| `orphan_pages`, `stale_claims` | 수동 확인 권장 메시지만 출력 |
 ```
 
 ---
@@ -470,7 +479,7 @@ python wiki_builder/orchestrate.py --phase generate  # plan.json 있으면 gener
 | Phase 4 Evaluate | 완료 | 사람 컨펌 필요 |
 | Phase 5 Query | 완료 | Orchestrator tool + --phase query 직접 경로 모두 지원 |
 | Phase 6 Lint | 완료 | |
-| Lint → Generate 피드백 루프 | **예정** | lint 결과 → plan 보완 → 재생성 |
+| Lint → Generate 피드백 루프 | **완료** | Post-Lint: broken_links→plan추가/missing_backlinks→linked리셋/contradictions→generated리셋 |
 | Chat REPL (Orchestrator 기반) | 완료 | 자연어 입력 → Orchestrator 판단 |
 | Server / WikiClient | 완료 | sdmAnalyzer 연동 미테스트 |
 | index.md 자동 갱신 | 미구현 | Generate 완료 후 수동 필요 |
