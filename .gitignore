@@ -6,15 +6,11 @@
 __pycache__/
 *.pyc
 
-# 런타임 생성 파일 (재생성 가능)
-plan.json
+# 런타임 생성 파일
 eval.log
 eval_history.json
 build.log
 feature_priority.json
-
-# 생성된 wiki (결과물 — 재생성 가능)
-wiki/
 
 # 3GPP 스펙 원본 (별도 입수)
 sources/
