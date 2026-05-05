@@ -34,7 +34,7 @@
 │                                                               │
 │   query.py  ← 예외: tool 방식 아님, 2-step stateless 독립 동작 │
 │                                                               │
-│   공통: api.py (call_simple), prompts.py                     │
+│   공통: api.py (call_simple), prompt_loader.py + sub_agents/*.md │
 └──────────────────────────────────────────────────────────────┘
                  │
                  ▼
@@ -66,11 +66,16 @@ sources/3gpp/38211-i90.docx
         ▼ chunk_text.py (섹션 경계 우선, 40~50K자 청크)
    [청크 1] [청크 2] [청크 3] ...
         │
-        ▼ LLM (PLANNER_SYSTEM + PLANNER_USER)
+        ▼ LLM (sub_agents/planner.md)
    각 청크 → 생성할 페이지 목록 (JSON)
         │
         ▼ 중복 제거, 통합
    plan.json  ← 체크포인트. 절대 삭제 금지.
+        │
+        ▼ Phase 1.5: Post-Plan
+        코드 검증: 중복 섹션 감지
+        LLM 검증 (sub_agents/post_plan.md): path/description ↔ 섹션 의미 불일치 제거
+        post_plan_done=True 플래그 기록
 ```
 
 **plan.json 예시**:
@@ -113,8 +118,8 @@ plan.json
    ├── extract_spec_content(page)
    │     └── 소스 파일에서 지정 섹션만 추출 (전체 파일 전달 금지)
    │
-   ├── LLM 호출 (GENERATOR_SYSTEM + GENERATOR_USER)
-   │     입력: 섹션 내용 + wiki 페이지 경로 목록(내용 없이)
+   ├── LLM 호출 (sub_agents/generator.md)
+   │     입력: 섹션 내용 + wiki 페이지 path:description 목록
    │     출력: 마크다운 wiki 페이지
    │
    ├── hallucination 감지
@@ -148,7 +153,7 @@ wiki/ 전체 스캔
    ├── inbound 링크 목록 계산
    │     "이 페이지를 링크하는 페이지들"
    │
-   └── LLM 호출 (LINKER_SYSTEM + LINKER_USER)
+   └── LLM 호출 (sub_agents/linker.md)
          입력: 파일 내용 + inbound 링크 목록
          출력: 역방향 링크가 추가된 수정본
 ```
@@ -384,7 +389,7 @@ wiki/log.md
 
 ## 6. wiki 페이지 포맷
 
-모든 wiki 페이지는 아래 구조를 엄수 (AGENTS.md Part 1 기준):
+모든 wiki 페이지는 아래 구조를 엄수 (AGENTS.md 기준):
 
 ```markdown
 # [페이지명]
@@ -452,7 +457,7 @@ python wiki_builder/orchestrate.py --phase generate  # plan.json 있으면 gener
 |------|------|-----------|
 | `orchestrate.py` | CLI 진입점, Orchestrator LLM 에이전트 | ✓ |
 | `api.py` | LLM 추상화 (Claude/gptoss/Gemini) | ✓ |
-| `prompts.py` | 모든 LLM 프롬프트 | Evaluator만 (전체 재작성) |
+| `prompt_loader.py` | 프롬프트 로더 (sub_agents/*.md 읽기) | ✓ |
 | `plan.py` | Phase 1: Planner | ✓ |
 | `generate.py` | Phase 2: Generator + hallucination 감지 | ✓ |
 | `link.py` | Phase 3: Linker | ✓ |
@@ -463,7 +468,8 @@ python wiki_builder/orchestrate.py --phase generate  # plan.json 있으면 gener
 | `server.py` | JSON stdio 서버 | ✓ |
 | `wiki_client.py` | sdmAnalyzer용 클라이언트 | ✓ |
 | `chunk_text.py` | 소스 파일 청킹 유틸 | ✓ |
-| `AGENTS.md` | wiki 작성 규칙 | Part 2만 (전체 재작성) |
+| `AGENTS.md` | Orchestrator LLM 시스템 프롬프트 (orchestrate.py가 직접 읽음) | Evaluator + 사람 승인 후 (전체 재작성) |
+| `sub_agents/*.md` | phase별 LLM 프롬프트 (system + user 템플릿) | Evaluator만 (전체 재작성) |
 | `KARPATHY_LLMWIKI.md` | 패턴 원문 | 수정 금지 |
 
 ---

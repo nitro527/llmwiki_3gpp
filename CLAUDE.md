@@ -1,7 +1,7 @@
 # CLAUDE.md — LLMWiki 개발 지침 (Claude Code 전용)
 
 > **이 파일의 독자**: Claude Code (개발 도구).
-> 런타임 에이전트 행동 지침은 `AGENTS.md`를 볼 것.
+> Orchestrator LLM 시스템 프롬프트는 `AGENTS.md`, 서브에이전트 프롬프트는 `sub_agents/*.md`를 볼 것.
 
 ---
 
@@ -10,7 +10,8 @@
 | 파일 | 독자 | 내용 |
 |------|------|------|
 | `CLAUDE.md` (이 파일) | Claude Code | 구현 방법, 아키텍처, 테스트 |
-| `AGENTS.md` | 런타임 에이전트 프로그램 | 에이전트가 실행 중 따라야 할 행동 지침 |
+| `AGENTS.md` | Orchestrator LLM | Orchestrator 시스템 프롬프트 (`orchestrate.py`가 직접 읽음) |
+| `sub_agents/*.md` | 각 서브에이전트 LLM | phase별 system/user 프롬프트 (`---USER---` 구분자로 분리) |
 
 **Claude Code 개발 중에는 모든 파일 수정 가능.**
 예외: `sources/`(원본 소스), `KARPATHY_LLMWIKI.md`(원문) — 읽기만.
@@ -21,7 +22,7 @@
 
 5G NR PHY 스펙(3GPP) → LLM용 지식베이스(wiki) 자동 구축·유지·조회.
 Karpathy LLM Wiki 패턴 구현체. 원문: `KARPATHY_LLMWIKI.md`
-요구사항: `PRD.md` / 구현 순서: `TASKS.md` / 에이전트 행동 규칙: `AGENTS.md`
+요구사항: `PRD.md` / 구현 순서: `TASKS.md` / Orchestrator 시스템 프롬프트: `AGENTS.md` / 서브에이전트 프롬프트: `sub_agents/*.md`
 
 ---
 
@@ -115,7 +116,7 @@ orchestrate.py
       ├── tool: run_link()       Phase 3:   Linker
       ├── tool: run_evaluate()   Phase 4:   Evaluator
       ├── tool: run_query()      Phase 5:   Query (Orchestrator 경유)
-      ├── tool: run_lint()       Phase 6:   Lint
+      ├── tool: run_lint()       Phase 6:   Lint + Post-Lint 후속 조치
       ├── tool: run_chat()       Chat REPL (tool로 등록되어 있으나 실제로는 REPL 진입점)
       └── tool: run_server()     Server
 
@@ -126,6 +127,7 @@ orchestrate.py
 - Orchestrator LLM이 상황 판단하여 tool 호출 순서 결정
 - Chat REPL은 사용자 입력을 Orchestrator에 직접 전달 — 커맨드 라우팅 없음
 - run_query는 Orchestrator tool로도 동작, --phase query는 직접 경로로도 동작
+- run_lint 완료 후 run_post_lint 자동 실행 — 이슈별 사용자 확인 후 run_generate/run_link 연쇄 호출
 
 ### 구현 시 핵심 제약 (AGENTS.md에서 가져옴)
 
@@ -137,7 +139,7 @@ orchestrate.py
 | Planner: 소스 파일 완료 시마다 plan.json 저장 | 중간 crash 복구 |
 | Planner: existing_pages를 `path: description` 형태로 LLM 전달 | 기존 범위 인지 |
 | Post-Plan: 코드 검증(중복 섹션) + LLM 검증(의미적 불일치) | plan 품질 보장 |
-| Generator: 입력에 섹션 내용 + page path 목록만 전달 | 컨텍스트 과부하 방지 |
+| Generator: 입력에 섹션 내용 + `path: description` 목록 전달 | 컨텍스트 과부하 방지 |
 | Generator: hallucination 감지 후 저장 (3어절 5회 반복 → 차단) | 품질 보장 |
 | plan.json 절대 삭제 금지 — generated/linked/post_plan_done 플래그로 재개 | 체크포인트 |
 | LLM 호출 실패: 최대 3회 재시도, exponential backoff (5→10→20초) | 안정성 |
@@ -146,6 +148,31 @@ orchestrate.py
 | Server 모드: stdout은 JSON 전용, 로그는 stderr/파일만 | sdmAnalyzer 프로토콜 |
 | Query: 페이지 선택 최대 5개 | 컨텍스트 과부하 방지 |
 | Lint: LLM에게 전체 wiki 한 번에 전달 금지 — 5페이지 묶음 단위 | 컨텍스트 과부하 방지 |
+| Post-Lint: broken_links → plan 추가 / missing_backlinks → linked 리셋 / contradictions → generated 리셋 | Lint 후 자동 복구 |
+
+---
+
+## 프롬프트 수정 방법
+
+프롬프트를 수정할 때는 `sub_agents/` 디렉토리의 해당 .md 파일을 직접 편집한다.
+
+| 에이전트 | 파일 |
+|---------|------|
+| Planner | `sub_agents/planner.md` |
+| Post-Plan | `sub_agents/post_plan.md` |
+| Generator | `sub_agents/generator.md` |
+| Checker | `sub_agents/checker.md` |
+| Linker | `sub_agents/linker.md` |
+| Evaluator | `sub_agents/evaluator.md` |
+| Query Selector | `sub_agents/query_selector.md` |
+| Query Synthesizer | `sub_agents/query_synthesizer.md` |
+| Lint | `sub_agents/lint.md` |
+| Feature Generator | `sub_agents/feature_generator.md` |
+
+각 .md 파일 포맷: system 프롬프트 본문 + `---USER---` 구분자 + user 프롬프트 템플릿.
+`wiki_builder/prompt_loader.py`의 `load_prompt(agent_name) -> tuple[str, str]`로 읽는다.
+
+Evaluator가 프롬프트를 개선할 때도 해당 `sub_agents/*.md` 파일을 재작성한다.
 
 ---
 

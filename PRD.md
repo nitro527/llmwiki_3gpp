@@ -26,7 +26,7 @@ Karpathy의 LLM Wiki 패턴을 직접 구현한 에이전트. 원문: `KARPATHY_
 
 ```
 llmwiki/
-├── AGENTS.md               # wiki 작성 규칙 (Part1: 목표/평가기준, Part2: 방법론)
+├── AGENTS.md               # Orchestrator LLM 시스템 프롬프트
 ├── CLAUDE.md               # Claude Code 작업 지침
 ├── KARPATHY_LLMWIKI.md     # Karpathy 원문 보존 (수정 불가)
 ├── sample.md               # 목표 품질 샘플 문서 (사람이 제공)
@@ -45,6 +45,7 @@ llmwiki/
 │   ├── concepts/
 │   ├── internal/
 │   └── query/              # 질의 응답 결과 보관 (선택적 filing)
+├── sub_agents/             # phase별 LLM 프롬프트 (.md 파일)
 ├── chunk_text.py           # 파일 청킹 유틸
 ├── requirements.txt
 └── wiki_builder/
@@ -58,7 +59,7 @@ llmwiki/
     ├── chat.py             # 대화형 REPL 인터페이스 (터미널)
     ├── server.py           # JSON stdio 서버 (sdmAnalyzer 연동용)
     ├── wiki_client.py      # sdmAnalyzer에서 import하는 클라이언트 래퍼
-    ├── prompts.py          # 모든 프롬프트 (Evaluator 수정 대상)
+    ├── prompt_loader.py    # 프롬프트 로더 (sub_agents/*.md 읽기)
     └── api.py              # LLM API 추상화 (Claude / gpt-oss 전환)
 ```
 
@@ -74,7 +75,7 @@ llmwiki/
 ### Phase 2: Generate
 - plan.json 기반으로 페이지별 wiki 문서 생성
 - 페이지당 LLM 1회 독립 호출 (컨텍스트 오염 없음)
-- 입력: plan에 명시된 섹션 내용만 + page path 목록 (내용 없이 path만)
+- 입력: plan에 명시된 섹션 내용 + wiki 페이지 path:description 목록
 - 병렬 처리 (ThreadPoolExecutor)
 - 생성 즉시 Quality Checker로 품질 평가
 - 불합격 시 Evaluator 호출

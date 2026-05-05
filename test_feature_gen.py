@@ -19,7 +19,8 @@ warnings.filterwarnings('ignore')
 import google.generativeai as genai
 genai.configure(api_key=os.environ['GEMINI_API_KEY'])
 
-from wiki_builder.prompts import FEATURE_GENERATOR_SYSTEM, FEATURE_GENERATOR_USER
+from wiki_builder.prompt_loader import load_prompt
+FEATURE_GENERATOR_SYSTEM, FEATURE_GENERATOR_USER = load_prompt("feature_generator")
 from wiki_builder.parse_38822 import _MANDATORY_LABEL
 
 MODEL = "models/gemini-3-flash-preview"
