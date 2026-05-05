@@ -9,8 +9,8 @@
   "pages": [
     {
       "path": "entities/PUSCH.md",
-      "description": "Physical Uplink Shared Channel 개체 개요 (데이터 전송, 스크램블링, 변조, 레이어 매핑, 프리코딩, 전력 제어 및 링크 복구 절차 포함)",
-      "generated": true,
+      "description": "Physical Uplink Shared Channel 개체 개요 (데이터 전송, 전력 제어, TCI 상태 관리, 링크 복구 및 주파수 호핑 절차 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -23,34 +23,20 @@
           "file": "sources\\3gpp\\38212-i80.docx",
           "sections": [
             "6.2",
-            "6.2.1",
-            "6.2.2",
-            "6.2.3",
-            "6.2.4",
-            "6.2.5",
-            "6.2.6",
-            "6.2.7"
+            "6.3.2"
           ]
         },
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "7.1",
-            "7.1.1"
+            "7.1"
           ]
         },
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
             "6.1",
-            "6.1.1",
-            "6.1.2",
-            "6.1.3",
-            "6.1.4",
-            "6.1.5",
-            "6.1.6",
-            "6.1.7",
-            "6.4"
+            "6.3"
           ]
         }
       ]
@@ -58,7 +44,7 @@
     {
       "path": "concepts/PUSCH_Scrambling.md",
       "description": "PUSCH 데이터 스크램블링 절차",
-      "generated": true,
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -71,8 +57,8 @@
     },
     {
       "path": "concepts/PUSCH_Modulation.md",
-      "description": "PUSCH 데이터 변조 절차",
-      "generated": true,
+      "description": "PUSCH 변조 차수(Qm) 및 타겟 코드 레이트(R) 결정 절차 (MCS 테이블 선택, Transform Precoding 활성/비활성 케이스 및 Msg3/MsgA 고려)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -80,13 +66,20 @@
           "sections": [
             "6.3.1.2"
           ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "6.1.4",
+            "6.1.4.1"
+          ]
         }
       ]
     },
     {
       "path": "concepts/PUSCH_Layer_Mapping.md",
       "description": "PUSCH 레이어 매핑 절차",
-      "generated": true,
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -99,8 +92,8 @@
     },
     {
       "path": "concepts/PUSCH_Transform_Precoding.md",
-      "description": "PUSCH 변환 프리코딩(Transform Precoding) 활성화/비활성화 결정 및 적용 절차 (DCI, RRC 파라미터 및 MCS 테이블 연동)",
-      "generated": true,
+      "description": "PUSCH 변환 프리코딩(Transform Precoding) 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -108,21 +101,13 @@
           "sections": [
             "6.3.1.4"
           ]
-        },
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "6.1.3",
-            "6.1.4.1",
-            "6.1.4.2"
-          ]
         }
       ]
     },
     {
       "path": "concepts/PUSCH_Precoding.md",
-      "description": "PUSCH 프리코딩 및 레이어 매핑을 위한 DCI 필드(Precoding information, SRI, PTRS-DMRS association) 해석 및 적용",
-      "generated": true,
+      "description": "PUSCH 프리코딩 정보 및 레이어 수 결정 절차 (DCI 필드 기반, 코드북/비코드북 모드, Full Power 전송 모드 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -142,8 +127,8 @@
     },
     {
       "path": "concepts/PUSCH_Resource_Mapping.md",
-      "description": "PUSCH 주파수 도메인 자원 할당(Type 1/2) 및 RAR UL grant 기반 자원 매핑 절차",
-      "generated": true,
+      "description": "PUSCH 주파수/시간 도메인 자원 할당 및 다중 셀 스케줄링 절차 (DCI 0_3 기반)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -152,13 +137,19 @@
             "6.3.1.6",
             "6.3.1.7"
           ]
+        },
+        {
+          "file": "sources\\3gpp\\38212-i80.docx",
+          "sections": [
+            "7.3.1.1.4"
+          ]
         }
       ]
     },
     {
       "path": "entities/PUCCH.md",
-      "description": "Physical Uplink Control Channel 개체 개요 (UCI 전송, 포맷별 구성, 자원 매핑 및 전력 제어 절차)",
-      "generated": true,
+      "description": "Physical Uplink Control Channel 개체 개요 (포맷별 구성, 자원 매핑, 전력 제어 및 CSI 보고 절차 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -172,13 +163,19 @@
           "sections": [
             "6.3.1"
           ]
+        },
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "7.2"
+          ]
         }
       ]
     },
     {
       "path": "concepts/PUCCH_Sequence_Hopping.md",
       "description": "PUCCH 시퀀스 및 순환 시프트 호핑 절차",
-      "generated": true,
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -191,8 +188,8 @@
     },
     {
       "path": "concepts/PUCCH_Format_Processing.md",
-      "description": "PUCCH 포맷별(0, 1, 2, 3, 4) UCI 전송을 위한 시퀀스 생성, 변조, 확산, 자원 매핑 및 PRB 결정 절차",
-      "generated": true,
+      "description": "PUCCH 포맷별(0, 1, 2, 3, 4) 시퀀스 생성, 변조, 확산, 자원 매핑 및 전력 제어 파라미터 결정 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -203,21 +200,13 @@
             "6.3.2.5",
             "6.3.2.6"
           ]
-        },
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "9.2.2",
-            "9.2.3",
-            "9.2.5.1"
-          ]
         }
       ]
     },
     {
       "path": "entities/PRACH.md",
-      "description": "Physical Random-Access Channel 개체 개요 (전송 전력 제어 및 랜덤 액세스 절차 연동 포함)",
-      "generated": true,
+      "description": "Physical Random-Access Channel 개체 개요",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -231,7 +220,7 @@
     {
       "path": "concepts/PRACH_Sequence_Generation.md",
       "description": "PRACH 프리앰블 시퀀스 생성 절차",
-      "generated": true,
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -245,7 +234,7 @@
     {
       "path": "concepts/PRACH_Resource_Mapping.md",
       "description": "PRACH 물리 자원 매핑 절차",
-      "generated": true,
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -257,29 +246,16 @@
       ]
     },
     {
-      "path": "entities/Reference_Signals.md",
-      "description": "상향링크 및 하향링크 참조 신호(DMRS, PT-RS, SRS, CSI-RS, PRS, RIM-RS) 개요",
-      "generated": true,
+      "path": "entities/DMRS.md",
+      "description": "Demodulation Reference Signal 개체 개요 (PDSCH/PUSCH용 DMRS, PT-RS 연동 및 안테나 포트 매핑)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "6.4",
-            "7.4"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/DMRS_Generation_Mapping.md",
-      "description": "PDSCH DMRS 시퀀스 생성, 자원 매핑 및 수신 절차 (포트 매핑, CDM 그룹, QCL 및 co-scheduling 제한 포함)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
+            "6.4.1.1",
+            "6.4.1.3",
             "7.4.1.1",
             "7.4.1.3",
             "7.4.1.4"
@@ -288,15 +264,18 @@
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "5.1.6.2"
+            "4.1",
+            "5.1.6.2",
+            "6.2.2"
           ]
         }
-      ]
+      ],
+      "failed_reason": "hallucination"
     },
     {
-      "path": "concepts/PTRS_Generation_Mapping.md",
-      "description": "PUSCH 및 PDSCH용 위상 추적 참조 신호(PT-RS) 생성 및 DCI 기반 DMRS 연관(Association) 절차",
-      "generated": true,
+      "path": "entities/PT_RS.md",
+      "description": "Phase-tracking Reference Signal 개체 개요 (PDSCH/PUSCH용 PT-RS, EPRE 비율 및 변환 프리코딩 연동)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -307,23 +286,19 @@
           ]
         },
         {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "7.3.1.1.2"
-          ]
-        },
-        {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "5.1.6.3"
+            "4.1",
+            "5.1.6.3",
+            "6.2.3"
           ]
         }
       ]
     },
     {
-      "path": "concepts/SRS_Generation_Mapping.md",
-      "description": "SRS 자원 설정 및 DCI를 통한 SRS 요청/지시(SRS resource indicator, SRS resource set indicator) 절차",
-      "generated": true,
+      "path": "entities/SRS.md",
+      "description": "Sounding Reference Signal 개체 개요 (DL CSI 획득, 포지셔닝 및 CLI 측정용 SRS)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -333,82 +308,18 @@
           ]
         },
         {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "7.3.1.1.2",
-            "7.3.1.1.3"
-          ]
-        },
-        {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "6.2.1",
-            "6.2.1.1",
-            "6.2.1.2",
-            "6.2.1.3",
-            "6.2.1.4",
-            "6.2.1.4.1",
-            "6.2.1.4.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/CSI_RS_Generation_Mapping.md",
-      "description": "CSI 참조 신호(CSI-RS) 생성 및 자원 매핑 절차 (Tracking, L1-RSRP/SINR, Mobility, NZP CSI-RS 포함)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "7.4.1.5"
-          ]
-        },
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.1.6.1",
-            "5.1.6.1.1",
-            "5.1.6.1.2",
-            "5.1.6.1.3",
-            "5.2.2.3.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Modulation_Mapper.md",
-      "description": "비트 단위의 복소수 심볼 변조 매핑 절차 (π/2-BPSK, BPSK, QPSK, 16/64/256/1024QAM)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "5.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Sequence_Generation.md",
-      "description": "의사 난수(Pseudo-random) 및 Low-PAPR 시퀀스 생성 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "5.2"
+            "5.1.6.4",
+            "6.2.1"
           ]
         }
       ]
     },
     {
       "path": "concepts/OFDM_Baseband_Signal_Generation.md",
-      "description": "채널별 OFDM 기저대역 신호 생성 및 CP 확장 절차",
-      "generated": true,
+      "description": "OFDM 기저대역 신호 생성 절차 (채널별 CP 확장 및 시간 연속 신호 생성)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -420,15 +331,43 @@
       ]
     },
     {
-      "path": "concepts/Frame_Structure_Numerology.md",
-      "description": "프레임 구조, 슬롯, 서브프레임 및 뉴머롤로지(Numerology) 정의",
-      "generated": true,
+      "path": "concepts/Modulation_Mapper.md",
+      "description": "비트-심볼 매핑 절차 (BPSK, QPSK, QAM 등)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "4.2",
+            "5.1"
+          ]
+        }
+      ],
+      "failed_reason": "hallucination"
+    },
+    {
+      "path": "concepts/Sequence_Generation.md",
+      "description": "의사 난수 및 Low-PAPR 시퀀스 생성 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "5.2"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Frame_Structure.md",
+      "description": "프레임, 서브프레임, 슬롯 구조 및 타이밍 관계",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
             "4.3"
           ]
         }
@@ -436,7 +375,7 @@
     },
     {
       "path": "concepts/Physical_Resource_Grid.md",
-      "description": "안테나 포트, 자원 그리드, RB, BWP 및 물리 자원 정의",
+      "description": "자원 그리드, 안테나 포트, 자원 블록 및 대역폭 파트(BWP) 정의",
       "generated": false,
       "linked": false,
       "sources": [
@@ -450,9 +389,23 @@
       "failed_reason": "hallucination"
     },
     {
+      "path": "concepts/DMRS_Sequence_Generation.md",
+      "description": "PUSCH DMRS 시퀀스 생성 절차 (Transform Precoding 활성화/비활성화 케이스)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "6.4.1.1.1"
+          ]
+        }
+      ]
+    },
+    {
       "path": "entities/PDSCH.md",
-      "description": "Physical Downlink Shared Channel 개체 개요 (스크램블링, 변조, 레이어 매핑, 안테나 포트 매핑, VRB-to-PRB 매핑 및 슬롯 포맷/취소 절차 포함)",
-      "generated": true,
+      "description": "Physical Downlink Shared Channel 개체 개요 (Unicast/Multicast/Broadcast 수신, HARQ 프로세스 관리, TCI 상태 및 SFN 전송 모드 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -477,8 +430,8 @@
     },
     {
       "path": "entities/PDCCH.md",
-      "description": "Physical Downlink Control Channel 개체 개요 (PDCCH 모니터링 능력, 검색 공간, CCE/Candidate 제한, 자원 매핑, TCI 상태 및 QCL 가정 절차 포함)",
-      "generated": true,
+      "description": "Physical Downlink Control Channel 개체 개요 (CCE, CORESET 구성, 모니터링 능력 및 후보군 검출 절차 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -502,75 +455,119 @@
       ]
     },
     {
-      "path": "concepts/PDSCH_Scrambling.md",
-      "description": "PDSCH 데이터 스크램블링 절차 (Codeword별 스크램블링 및 RNTI/Identity 기반 초기화)",
-      "generated": true,
+      "path": "concepts/PUSCH_DMRS_Mapping.md",
+      "description": "PUSCH DMRS 시퀀스 프리코딩 및 물리 자원 매핑 절차 (DCI 필드 기반 안테나 포트 설정 및 DMRS 시퀀스 초기화 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "7.3.1.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PDSCH_Modulation.md",
-      "description": "PDSCH 데이터 변조 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "7.3.1.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PDSCH_Layer_Mapping.md",
-      "description": "PDSCH 레이어 매핑 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "7.3.1.3"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PDSCH_Resource_Mapping.md",
-      "description": "PDSCH의 안테나 포트 매핑 및 VRB-to-PRB 매핑 절차 (Interleaved/Non-interleaved 매핑 포함)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "7.3.1.4",
-            "7.3.1.5",
-            "7.3.1.6"
+            "6.4.1.1.3"
           ]
         },
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "5.1.4",
-            "5.1.4.1",
-            "5.1.4.2"
+            "6.2.2"
           ]
         }
       ]
     },
     {
-      "path": "concepts/PDCCH_CORESET_Mapping.md",
-      "description": "PDCCH CORESET 구성 및 매핑 절차 (CORESET 인덱스, coresetPoolIndex, DM-RS 스크램블링 초기화 및 QCL 가정)",
-      "generated": true,
+      "path": "concepts/PUSCH_PTRS_Generation_Mapping.md",
+      "description": "PUSCH PT-RS 전송 절차 (변환 프리코딩 활성/비활성 케이스별 시간/주파수 밀도 결정, 안테나 포트 연동 및 전력 비율 계산)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "6.4.1.2.1",
+            "6.4.1.2.2"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "6.2.3",
+            "6.2.3.1",
+            "6.2.3.2"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PUCCH_DMRS_Processing.md",
+      "description": "PUCCH 포맷별(1, 2, 3, 4) DMRS 시퀀스 생성 및 물리 자원 매핑 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "6.4.1.3.1",
+            "6.4.1.3.2",
+            "6.4.1.3.3"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/SRS_Processing.md",
+      "description": "CLI(Cross-Link Interference) 측정을 위한 SRS 자원 설정 및 SRS-RSRP 측정 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "6.4.1.4.1",
+            "6.4.1.4.2",
+            "6.4.1.4.3",
+            "6.4.1.4.4"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.6.4"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PDSCH_Processing.md",
+      "description": "DL-SCH/PCH 데이터의 CRC 부착, LDPC 베이스 그래프 선택, 코드 블록 분할/연결, 채널 코딩 및 레이트 매칭 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38212-i80.docx",
+          "sections": [
+            "7.2.1",
+            "7.2.2",
+            "7.2.3",
+            "7.2.4",
+            "7.2.5",
+            "7.2.6"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.7",
+            "5.1.7.1",
+            "5.1.7.2"
+          ]
+        }
+      ],
+      "failed_reason": "hallucination"
+    },
+    {
+      "path": "concepts/PDCCH_Processing.md",
+      "description": "PDCCH CCE 구성, CORESET 설정(coresetPoolIndex, DMRS 스크램블링) 및 검색 공간 기반 모니터링 기회 결정 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -589,57 +586,9 @@
       ]
     },
     {
-      "path": "concepts/PDCCH_Scrambling.md",
-      "description": "PDCCH 데이터 스크램블링 절차 (RNTI 및 DMRS-ScramblingID 기반 초기화)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "7.3.2.3"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PDCCH_Modulation.md",
-      "description": "PDCCH 데이터 변조 절차 (QPSK)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "7.3.2.4"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PDCCH_Resource_Mapping.md",
-      "description": "PDCCH 물리 자원 매핑 절차 (CCE 인덱싱, 후보군 매핑, 크로스 캐리어 스케줄링 및 다중 서빙 셀 환경에서의 자원 할당)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "7.3.2.5"
-          ]
-        },
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "10.1"
-          ]
-        }
-      ]
-    },
-    {
       "path": "entities/PBCH.md",
-      "description": "Physical Broadcast Channel 개체 개요 (페이로드 생성, 스크램블링, 채널 코딩 및 레이트 매칭)",
-      "generated": true,
+      "description": "Physical Broadcast Channel 개체 개요",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -657,43 +606,152 @@
       ]
     },
     {
-      "path": "concepts/PBCH_Scrambling.md",
-      "description": "PBCH 데이터 스크램블링 절차 (SS/PBCH 블록 인덱스 기반 초기화)",
-      "generated": true,
+      "path": "concepts/PBCH_Processing.md",
+      "description": "PBCH 페이로드 생성, 스크램블링, CRC 부착, Polar 코딩 및 레이트 매칭 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "7.3.3.1"
+            "7.3.3.1",
+            "7.3.3.2"
           ]
         },
         {
           "file": "sources\\3gpp\\38212-i80.docx",
           "sections": [
-            "7.1.2"
+            "7.1.1",
+            "7.1.2",
+            "7.1.3",
+            "7.1.4",
+            "7.1.5"
           ]
         }
       ]
     },
     {
-      "path": "concepts/PBCH_Modulation.md",
-      "description": "PBCH 데이터 변조 절차 (QPSK)",
-      "generated": true,
+      "path": "concepts/PDSCH_DMRS_Processing.md",
+      "description": "PDSCH DMRS 수신 절차 (DCI 포맷별 매핑, 안테나 포트 할당, Enhanced DMRS 타입, QCL 및 PT-RS 연동)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "7.3.3.2"
+            "7.4.1.1.1",
+            "7.4.1.1.2"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.6.2"
           ]
         }
       ]
     },
     {
-      "path": "concepts/RIM_RS_Generation_Mapping.md",
-      "description": "RIM 참조 신호(RIM-RS) 생성 및 자원 매핑 절차",
-      "generated": true,
+      "path": "concepts/PDCCH_DMRS_Processing.md",
+      "description": "PDCCH DMRS 시퀀스 생성 및 물리 자원 매핑 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "7.4.1.3.1",
+            "7.4.1.3.2"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PBCH_DMRS_Processing.md",
+      "description": "PBCH DMRS 시퀀스 생성 및 물리 자원 매핑 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "7.4.1.4.1",
+            "7.4.1.4.2"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PDSCH_PTRS_Processing.md",
+      "description": "PDSCH PT-RS 수신 절차 (시간/주파수 밀도 결정, MCS/대역폭 기반 존재 여부 판단 및 DM-RS 연동)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "7.4.1.2.1",
+            "7.4.1.2.2"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.6.3"
+          ]
+        }
+      ],
+      "failed_reason": "quality_fail"
+    },
+    {
+      "path": "entities/CSI_RS.md",
+      "description": "CSI Reference Signal 개체 개요 (추적, L1-RSRP/SINR 측정, 이동성 및 포지셔닝용 NZP CSI-RS)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "7.4.1.5"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.6.1",
+            "5.2.2.3"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/CSI_RS_Processing.md",
+      "description": "CSI-RS 시퀀스 생성, 물리 자원 매핑 및 추적(TRS)을 위한 설정 및 수신 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "7.4.1.5.1",
+            "7.4.1.5.2",
+            "7.4.1.5.3"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.6",
+            "5.1.6.1",
+            "5.1.6.1.1"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "entities/RIM_RS.md",
+      "description": "RIM Reference Signal 개체 개요 (간섭 측정용)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -705,9 +763,25 @@
       ]
     },
     {
-      "path": "concepts/PRS_Generation_Mapping.md",
-      "description": "DL PRS 생성, 자원 매핑 및 포지셔닝 측정 절차 (RSTD, RSRP, RSRPP, UE Rx-Tx time difference 및 보고 포함)",
-      "generated": true,
+      "path": "concepts/RIM_RS_Processing.md",
+      "description": "RIM-RS 시퀀스 생성, 물리 자원 매핑 및 구성 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "7.4.1.6.2",
+            "7.4.1.6.3",
+            "7.4.1.6.4"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "entities/PRS.md",
+      "description": "Positioning Reference Signal 개체 개요 (측위 측정, 주파수 호핑 및 대역폭 집성)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -715,13 +789,41 @@
           "sections": [
             "7.4.1.7"
           ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.6.5"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PRS_Processing.md",
+      "description": "DL PRS 수신 및 측위 측정 절차 (자원 세트 구성, 뮤팅, QCL, RSTD/RSRP/RSRPP 측정 및 보고)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "7.4.1.7.2",
+            "7.4.1.7.3",
+            "7.4.1.7.4"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.6.5"
+          ]
         }
       ]
     },
     {
       "path": "entities/SS_PBCH_Block.md",
-      "description": "SS/PBCH 블록 개체 개요 (PSS, SSS, PBCH, DMRS 구성 및 셀 탐색 절차)",
-      "generated": true,
+      "description": "SS/PBCH Block 개체 개요 (PSS, SSS, PBCH, DMRS 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -729,81 +831,31 @@
           "sections": [
             "7.4.3"
           ]
-        },
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "4.1"
-          ]
         }
-      ]
+      ],
+      "failed_reason": "hallucination"
     },
     {
-      "path": "concepts/Synchronization_Signal_Generation.md",
-      "description": "PSS 및 SSS 시퀀스 생성 및 자원 매핑 절차",
-      "generated": true,
+      "path": "concepts/SS_PBCH_Block_Processing.md",
+      "description": "PSS, SSS, PBCH 및 DMRS의 SS/PBCH 블록 내 자원 매핑 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "7.4.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/SS_PBCH_Block_Mapping.md",
-      "description": "SS/PBCH 블록 내 PSS, SSS, PBCH 및 DMRS 자원 매핑 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "7.4.3.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "entities/Sidelink.md",
-      "description": "Sidelink 물리 채널 및 신호 개요 (PSSCH, PSBCH, PSCCH, PSFCH, S-SS/PSBCH 블록, SL PRS)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "8.1"
-          ]
-        },
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "16",
-            "16.1",
-            "16.2.0",
-            "16.2.3A"
-          ]
-        },
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "8.1",
-            "8.2",
-            "8.3",
-            "8.4",
-            "8.5",
-            "8.6"
+            "7.4.3.1",
+            "7.4.3.1.1",
+            "7.4.3.1.2",
+            "7.4.3.1.3"
           ]
         }
       ]
     },
     {
       "path": "entities/PSSCH.md",
-      "description": "Physical Sidelink Shared Channel 개체 개요 (자원 풀 구성, 전송 스킴, 자원 할당 및 SCI 기반 제어 정보 처리)",
-      "generated": true,
+      "description": "Physical Sidelink Shared Channel 개체 개요 (자원 풀 구성, 전송 절차, SCI 연동 및 자원 할당 모드)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -829,17 +881,15 @@
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
             "8",
-            "8.1",
-            "8.1.1",
-            "8.1.2"
+            "8.1"
           ]
         }
       ]
     },
     {
       "path": "entities/PSCCH.md",
-      "description": "Physical Sidelink Control Channel 개체 개요 (SCI 포맷 및 채널 코딩)",
-      "generated": true,
+      "description": "Physical Sidelink Control Channel 개체 개요 (전력 제어 및 자원 매핑 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -864,8 +914,8 @@
     },
     {
       "path": "entities/PSBCH.md",
-      "description": "Physical Sidelink Broadcast Channel 개체 개요 (SL-BCH 전송, 페이로드 및 레이트 매칭)",
-      "generated": true,
+      "description": "Physical Sidelink Broadcast Channel 개체 개요 (S-SS/PSBCH 블록 구성 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -890,8 +940,8 @@
     },
     {
       "path": "entities/PSFCH.md",
-      "description": "Physical Sidelink Feedback Channel 개체 개요",
-      "generated": true,
+      "description": "Physical Sidelink Feedback Channel 개체 개요 (HARQ-ACK/충돌 정보 전송 및 전력 제어)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -909,114 +959,89 @@
       ]
     },
     {
-      "path": "concepts/PSSCH_Scrambling.md",
-      "description": "PSSCH 데이터 스크램블링 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "8.3.1.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PSSCH_Modulation.md",
-      "description": "PSSCH 데이터 변조 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "8.3.1.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PSSCH_Layer_Mapping.md",
-      "description": "PSSCH 레이어 매핑 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "8.3.1.3"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PSSCH_Precoding.md",
-      "description": "PSSCH 프리코딩 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "8.3.1.4"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PSSCH_Resource_Mapping.md",
-      "description": "PSSCH 가상 자원 블록(VRB) 및 물리 자원 블록(PRB) 매핑 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "8.3.1.5",
-            "8.3.1.6"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PSCCH_Scrambling.md",
-      "description": "PSCCH 데이터 스크램블링 절차",
+      "path": "entities/SL_PRS.md",
+      "description": "Sidelink Positioning Reference Signal 개체 개요 (전력 제어 및 자원 풀 구성)",
       "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "8.3.2.1"
+            "8.4.1.6"
           ]
-        }
-      ],
-      "failed_reason": "quality_fail"
-    },
-    {
-      "path": "concepts/PSCCH_Modulation.md",
-      "description": "PSCCH 데이터 변조 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
+        },
         {
-          "file": "sources\\3gpp\\38211-i90.docx",
+          "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "8.3.2.2"
+            "16.2.3A"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "8.2.4"
           ]
         }
       ]
     },
     {
-      "path": "concepts/PSCCH_Resource_Mapping.md",
-      "description": "PSCCH 물리 자원 매핑 및 SCI 포맷 1-A/1-B 전송 절차",
-      "generated": true,
+      "path": "entities/S_SS_PSBCH_Block.md",
+      "description": "Sidelink SS/PSBCH Block 개체 개요 (S-PSS, S-SSS, PSBCH 구성 및 동기화 절차)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
+            "8.4.3"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "16.1"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PSSCH_Processing.md",
+      "description": "PSSCH 데이터 처리 절차 (변조 차수, 타겟 코드 레이트, 전송 블록 크기(TBS) 결정 및 자원 매핑)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "8.3.1.1",
+            "8.3.1.2",
+            "8.3.1.3",
+            "8.3.1.4",
+            "8.3.1.5",
+            "8.3.1.6"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "8.1.3",
+            "8.1.3.1",
+            "8.1.3.2"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PSCCH_Processing.md",
+      "description": "PSCCH SCI 포맷 1-A/1-B 구성 및 전송 절차 (자원 할당 모드 1/2, SL PRS 자원 풀 대응)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "8.3.2.1",
+            "8.3.2.2",
             "8.3.2.3"
           ]
         },
@@ -1030,37 +1055,25 @@
       ]
     },
     {
-      "path": "concepts/PSBCH_Scrambling.md",
-      "description": "PSBCH 데이터 스크램블링 절차",
-      "generated": true,
+      "path": "concepts/PSBCH_Processing.md",
+      "description": "PSBCH 스크램블링, 변조 및 물리 자원 매핑 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "8.3.3.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PSBCH_Modulation.md",
-      "description": "PSBCH 데이터 변조 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38211-i90.docx",
-          "sections": [
-            "8.3.3.2"
+            "8.3.3.1",
+            "8.3.3.2",
+            "8.3.3.3"
           ]
         }
       ]
     },
     {
       "path": "concepts/PSFCH_Processing.md",
-      "description": "PSFCH 송수신 절차 (HARQ-ACK 및 Conflict 정보 처리, 자원 매핑, 시퀀스 생성 및 전력 제어)",
-      "generated": true,
+      "description": "PSFCH HARQ-ACK 및 충돌 정보 전송/수신 절차 (자원 할당, 시퀀스 생성, 다중화 및 전력 제어)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1072,7 +1085,6 @@
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "16.2.5",
             "16.3",
             "16.3.0",
             "16.3.1"
@@ -1081,25 +1093,23 @@
       ]
     },
     {
-      "path": "concepts/Sidelink_DMRS_Generation_Mapping.md",
-      "description": "PSSCH, PSCCH, PSBCH용 DMRS 시퀀스 생성 및 자원 매핑 절차",
-      "generated": true,
+      "path": "concepts/PSSCH_DMRS_Processing.md",
+      "description": "PSSCH DMRS 시퀀스 생성 및 물리 자원 매핑 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "8.4.1.1",
-            "8.4.1.3",
-            "8.4.1.4"
+            "8.4.1.1"
           ]
         }
       ]
     },
     {
-      "path": "concepts/Sidelink_PTRS_Generation_Mapping.md",
-      "description": "PSSCH용 PT-RS 시퀀스 생성 및 자원 매핑 절차",
-      "generated": true,
+      "path": "concepts/PSSCH_PTRS_Processing.md",
+      "description": "PSSCH PT-RS 시퀀스 생성 및 물리 자원 매핑 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1111,23 +1121,37 @@
       ]
     },
     {
-      "path": "concepts/Sidelink_CSI_RS_Generation_Mapping.md",
-      "description": "Sidelink CSI-RS 시퀀스 생성 및 자원 매핑 절차",
-      "generated": true,
+      "path": "concepts/PSCCH_DMRS_Processing.md",
+      "description": "PSCCH DMRS 시퀀스 생성 및 물리 자원 매핑 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "8.4.1.5"
+            "8.4.1.3"
           ]
         }
       ]
     },
     {
-      "path": "concepts/SL_PRS_Generation_Mapping.md",
-      "description": "Sidelink Positioning Reference Signal(SL PRS) 생성 및 자원 매핑 절차",
-      "generated": true,
+      "path": "concepts/PSBCH_DMRS_Processing.md",
+      "description": "PSBCH DMRS 시퀀스 생성 및 물리 자원 매핑 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "8.4.1.4"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/SL_PRS_Processing.md",
+      "description": "SL PRS 시퀀스 생성, 물리 자원 매핑 및 전송 절차 (Dedicated/Shared 자원 풀, 자원 할당 및 SCI 1-B 연동)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1135,46 +1159,99 @@
           "sections": [
             "8.4.1.6"
           ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Sidelink_Synchronization_Signal_Generation.md",
-      "description": "S-PSS 및 S-SSS 시퀀스 생성 및 자원 매핑 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
+        },
         {
-          "file": "sources\\3gpp\\38211-i90.docx",
+          "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "8.4.2",
-            "8.4.3.1"
+            "8.2.4",
+            "8.2.4.1",
+            "8.2.4.1.1",
+            "8.2.4.1.2",
+            "8.2.4.2",
+            "8.2.4.2A"
           ]
         }
       ]
     },
     {
-      "path": "concepts/Sidelink_Resource_Grid.md",
-      "description": "Sidelink 물리 자원 그리드, 안테나 포트 및 뉴머롤로지 정의",
+      "path": "concepts/Sidelink_Sync_Signal_Processing.md",
+      "description": "Sidelink 동기화 절차 (S-SS/PSBCH 블록 수신, 주파수 위치 결정 및 TDD 설정)",
       "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38211-i90.docx",
           "sections": [
-            "8.2.2",
-            "8.2.4",
-            "8.2.5",
-            "8.2.6",
-            "8.2.7"
+            "8.4.2"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "16.1"
           ]
         }
-      ],
-      "failed_reason": "hallucination"
+      ]
     },
     {
-      "path": "concepts/Channel_Coding_General.md",
-      "description": "5G NR 채널 코딩 공통 절차 (CRC 계산, 코드 블록 세그멘테이션, Polar/LDPC 코딩, 레이트 매칭)",
+      "path": "concepts/S_SS_PSBCH_Block_Mapping.md",
+      "description": "S-SS/PSBCH 블록 내 S-PSS, S-SSS, PSBCH 및 DMRS 자원 매핑 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "8.4.3.1"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Sidelink_Physical_Resources.md",
+      "description": "Sidelink 물리 자원 구성 (자원 풀, 서브채널, 인터레이스 구조, 슬롯 할당 및 공유 스펙트럼 채널 액세스)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "8.2"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "16"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "8",
+            "8.1.2.1",
+            "8.1.2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Sidelink_Timing.md",
+      "description": "Sidelink 타이밍 관계 및 동기화 기준",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38211-i90.docx",
+          "sections": [
+            "8.5"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/CRC_Calculation.md",
+      "description": "UL-SCH, DL-SCH, PCH, BCH 및 UCI를 위한 CRC 생성 및 부착 절차",
       "generated": false,
       "linked": false,
       "sources": [
@@ -1182,214 +1259,192 @@
           "file": "sources\\3gpp\\38212-i80.docx",
           "sections": [
             "5.1",
-            "5.2",
-            "5.3",
-            "5.4",
-            "5.5"
-          ]
-        }
-      ],
-      "failed_reason": "hallucination"
-    },
-    {
-      "path": "concepts/UCI_Multiplexing_PUSCH.md",
-      "description": "PUSCH 상의 UCI(HARQ-ACK, CSI, SR) 멀티플렉싱 및 우선순위 처리 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "6.3.2"
-          ]
-        },
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "9"
+            "6.2.1",
+            "7.1.3",
+            "7.2.1",
+            "7.3.2",
+            "8.3.2",
+            "8.4.2"
           ]
         }
       ]
     },
     {
-      "path": "concepts/UCI_Processing_PUCCH.md",
-      "description": "PUCCH를 통한 UCI 비트 생성, 인코딩 및 멀티플렉싱 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "6.3.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/DCI_Formats_Processing.md",
-      "description": "DCI 포맷 정의, 크기 정렬 및 채널 코딩 절차",
+      "path": "concepts/Code_Block_Segmentation.md",
+      "description": "Polar 및 LDPC 코딩을 위한 코드 블록 분할 및 CRC 부착 절차",
       "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38212-i80.docx",
           "sections": [
+            "5.2",
+            "5.2.1",
+            "5.2.2",
+            "6.2.3",
+            "6.3.1.2",
+            "6.3.2.2",
+            "7.2.3"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Channel_Coding.md",
+      "description": "Polar, LDPC 및 소형 블록(Small block) 채널 코딩 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38212-i80.docx",
+          "sections": [
+            "5.3",
+            "5.3.1",
+            "5.3.2",
+            "5.3.3",
+            "6.2.4",
+            "6.3.1.3",
+            "6.3.2.3",
+            "7.1.4",
+            "7.2.4",
+            "7.3.3",
+            "8.3.3",
+            "8.4.3"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Rate_Matching.md",
+      "description": "Polar, LDPC 및 소형 블록 채널 코딩을 위한 레이트 매칭(서브블록 인터리빙, 비트 선택, 인터리빙) 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38212-i80.docx",
+          "sections": [
+            "5.4",
+            "5.4.1",
+            "5.4.2",
+            "5.4.3",
+            "6.2.5",
+            "6.3.1.4",
+            "6.3.2.4",
+            "7.1.5",
+            "7.2.5",
+            "7.3.4",
+            "8.3.4",
+            "8.4.4"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Code_Block_Concatenation.md",
+      "description": "레이트 매칭된 코드 블록들을 결합하여 전송 비트 시퀀스를 생성하는 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38212-i80.docx",
+          "sections": [
+            "5.5",
+            "6.2.6",
+            "6.3.1.5",
+            "6.3.2.5",
+            "7.2.6"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/UCI_Multiplexing.md",
+      "description": "UCI(HARQ-ACK, CSI, SR)와 UL-SCH 데이터를 PUSCH에 다중화하는 절차 및 우선순위 기반 채널 간 충돌 해결 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38212-i80.docx",
+          "sections": [
+            "6.2.7",
+            "6.3.1.6",
+            "6.3.2.6",
+            "6.3.2.7",
+            "8.2.1",
+            "8.4.5"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "9",
+            "9.2.5"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/DCI_Processing.md",
+      "description": "DCI 포맷 구성, 크기 정렬 및 채널 코딩 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38212-i80.docx",
+          "sections": [
+            "7.3",
             "7.3.1",
             "7.3.2",
             "7.3.3",
             "7.3.4"
           ]
         }
-      ],
-      "failed_reason": "hallucination"
-    },
-    {
-      "path": "concepts/Sidelink_Channel_Processing.md",
-      "description": "Sidelink 채널(PSBCH, PSSCH, PSCCH)의 데이터 및 제어 정보 처리 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "8.1",
-            "8.2",
-            "8.3",
-            "8.4"
-          ]
-        }
       ]
     },
     {
-      "path": "concepts/UCI_Bit_Sequence_Generation.md",
-      "description": "PUCCH 및 PUSCH 전송을 위한 UCI(HARQ-ACK, SR, CSI, CG-UCI, UTO-UCI) 비트 시퀀스 생성 및 필드 매핑 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "6.3.1.1",
-            "6.3.2.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/UCI_Channel_Coding.md",
-      "description": "UCI를 위한 코드 블록 세그멘테이션, CRC 부착 및 Polar/Small block 채널 코딩 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "6.3.1.2",
-            "6.3.1.3"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/UCI_Rate_Matching.md",
-      "description": "PUCCH 포맷별 UCI 레이트 매칭 및 출력 시퀀스 길이 결정 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "6.3.1.4"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/UCI_PUCCH_Multiplexing.md",
-      "description": "인코딩된 UCI 비트를 PUCCH 물리 자원에 매핑 및 멀티플렉싱하는 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "6.3.1.5",
-            "6.3.1.6"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PBCH_Payload_Generation.md",
-      "description": "PBCH 페이로드 생성, SFN/Half-frame/SSB 인덱스 비트 매핑 및 인터리빙 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "7.1.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PUSCH_DCI_Field_Processing.md",
-      "description": "DCI format 0_3의 PUSCH 스케줄링 관련 필드(SRI, TPMI, 안테나 포트, SRS 요청, 전력 제어 등) 해석 및 적용 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "7.3.1.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PDSCH_DCI_Field_Processing.md",
-      "description": "DCI format 1_0 및 1_1의 PDSCH 스케줄링 관련 필드(주파수/시간 자원 할당, HARQ, TPC, 코드북 지시 등) 해석 및 적용 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "7.3.1.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/RACH_Procedure_DCI_Trigger.md",
-      "description": "PDCCH order를 통한 랜덤 액세스 절차 트리거 및 관련 DCI 필드(RA Preamble index, PRACH Mask 등) 처리",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38212-i80.docx",
-          "sections": [
-            "7.3.1.2.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Sidelink_SCI_Processing.md",
-      "description": "Sidelink Control Information(SCI) 포맷(1-A, 2-A/B/C/D) 정의 및 PSSCH 전송을 위한 필드 설정 절차",
-      "generated": true,
+      "path": "concepts/SCI_Processing.md",
+      "description": "1st-stage 및 2nd-stage SCI 포맷 구성, CRC 부착, 채널 코딩 및 레이트 매칭 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38212-i80.docx",
           "sections": [
             "8.3.1",
-            "8.4.1"
+            "8.3.2",
+            "8.3.3",
+            "8.3.4",
+            "8.4.1",
+            "8.4.2",
+            "8.4.3",
+            "8.4.4"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "path": "concepts/SL_SCH_Processing.md",
+      "description": "SL-SCH 전송 채널 처리 및 데이터/제어 다중화 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
         {
-          "file": "sources\\3gpp\\38214-i90.docx",
+          "file": "sources\\3gpp\\38212-i80.docx",
+          "sections": [
+            "8.2",
+            "8.2.1"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/SL_BCH_Processing.md",
+      "description": "SL-BCH 전송 채널 처리 및 레이트 매칭 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38212-i80.docx",
           "sections": [
             "8.1"
           ]
@@ -1397,52 +1452,51 @@
       ]
     },
     {
-      "path": "concepts/Synchronization_Procedures.md",
-      "description": "UE 셀 탐색, 동기화 신호(PSS/SSS) 수신, SS/PBCH 블록 인덱스 결정 및 타이밍 조정 절차",
-      "generated": true,
+      "path": "concepts/SCI_Multiplexing.md",
+      "description": "2nd-stage SCI 비트와 PSSCH 데이터의 다중화 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38212-i80.docx",
+          "sections": [
+            "8.4.5"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Cell_Search.md",
+      "description": "SS/PBCH 블록 검출을 통한 시간/주파수 동기화 및 셀 ID 획득 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "4.1",
+            "4.1"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Timing_Advance.md",
+      "description": "상향링크 전송 타이밍 조정을 위한 TA(Timing Advance) 명령 처리 및 오프셋 보상 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
             "4.2"
           ]
         }
       ]
     },
     {
-      "path": "concepts/Timing_Advance_Adjustment.md",
-      "description": "상향링크 타이밍 조정을 위한 TA(Timing Advance) 명령 처리, 오프셋 적용 및 전송 타이밍 제어 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "4.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Radio_Link_Monitoring.md",
-      "description": "DL BWP별 무선 링크 품질 모니터링, RLM-RS 설정 및 Out-of-sync/In-sync 상태 보고 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "5"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/SCell_Activation_Deactivation_Timing.md",
-      "description": "SCell 활성화/비활성화 명령 수신에 따른 CSI 보고 및 타이밍 적용 절차",
-      "generated": true,
+      "path": "concepts/SCell_Activation_Deactivation.md",
+      "description": "SCell 활성화/비활성화 명령에 따른 타이밍 및 CSI 보고 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1454,9 +1508,23 @@
       ]
     },
     {
-      "path": "concepts/Link_Recovery_Procedures.md",
-      "description": "BWP별 무선 링크 품질 모니터링, 빔 실패 감지(BFD), 후보 빔 측정 및 링크 복구 요청(LRR) 절차",
-      "generated": true,
+      "path": "concepts/Radio_Link_Monitoring.md",
+      "description": "DL BWP별 RLM RS를 이용한 무선 링크 품질 평가 및 out-of-sync/in-sync 보고 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Link_Recovery.md",
+      "description": "BWP별 빔 실패 검출(BFD) 및 복구(BFR) 절차 (CSI-RS/SSB 기반 무선 링크 품질 평가, LRR 전송 및 TCI 상태 재설정)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1470,32 +1538,22 @@
     {
       "path": "concepts/Uplink_Power_Control.md",
       "description": "PUSCH, PUCCH, SRS 및 PRACH 전송을 위한 상향링크 전력 제어 절차 (경로 손실 추정, P0/Alpha 파라미터 설정, TCI 상태 기반 전력 조정)",
-      "generated": true,
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
             "7",
-            "7.1",
             "7.1.1"
-          ]
-        },
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "4.1",
-            "6.2.1",
-            "6.2.2",
-            "6.2.3"
           ]
         }
       ]
     },
     {
       "path": "concepts/PUSCH_Power_Control.md",
-      "description": "PUSCH 전송 전력 계산 절차 (DCI 기반 SRI/TPMI 매핑, Configured Grant, 랜덤 액세스 절차 연동 및 TCI 상태 기반 파라미터 적용)",
-      "generated": true,
+      "description": "PUSCH 전송 전력 결정 절차 (SRI 기반 P0/Alpha 매핑, Full Power 전송 모드, 다중 TCI 상태 적용 및 전력 스케일링)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1508,72 +1566,9 @@
       ]
     },
     {
-      "path": "concepts/PUCCH_Power_Control.md",
-      "description": "PUCCH 전송 전력 계산 절차 (경로 손실 추정, P0/Alpha 파라미터 설정, TPC 명령 처리, 폐루프 조정 상태 관리 및 포맷별 전력 조정)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "7.2.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "entities/SRS.md",
-      "description": "Sounding Reference Signal(SRS) 개체 개요 (CLI 측정 포함)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "7.3"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/SRS_Power_Control.md",
-      "description": "SRS 전송 전력 계산 절차 (경로 손실 추정, TPC 명령 적용, 전력 조정 상태 관리 및 포지셔닝 SRS 전력 제어 포함)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "7.3",
-            "7.3.1"
-          ]
-        },
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "6.2.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PRACH_Power_Control.md",
-      "description": "PRACH 전송 전력 계산 절차 (목표 수신 전력, 경로 손실 보상 및 랜덤 액세스 응답 연동)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "7.4"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Uplink_Power_Prioritization.md",
-      "description": "상향링크 채널(PUSCH/PUCCH/PRACH/SRS) 간 전송 전력 우선순위 결정 및 할당 절차",
-      "generated": true,
+      "path": "concepts/Prioritization_Power_Reduction.md",
+      "description": "상향링크 채널 간 전송 전력 우선순위 결정 및 전력 감소 절차 (PUSCH, PUCCH, PRACH, SRS 간 우선순위 규칙)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1586,8 +1581,8 @@
     },
     {
       "path": "concepts/Dual_Connectivity_Power_Control.md",
-      "description": "EN-DC, NE-DC 및 NR-DC 환경에서의 셀 그룹 간 전송 전력 공유 및 제어 절차",
-      "generated": true,
+      "description": "EN-DC, NE-DC 및 NR-DC 환경에서의 상향링크 전송 전력 제어 및 동적 전력 공유 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1603,8 +1598,8 @@
     },
     {
       "path": "concepts/Power_Headroom_Report.md",
-      "description": "Type 1 및 Type 3 Power Headroom Report(PHR) 생성 및 보고 절차 (실제 전송 및 참조 포맷 기반 계산)",
-      "generated": true,
+      "description": "Type 1 및 Type 3 전력 헤드룸 보고(PHR) 절차 (실제 전송 및 참조 포맷 기반 계산, 다중 TCI 상태 및 다중 패널 환경 고려)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1617,9 +1612,9 @@
       ]
     },
     {
-      "path": "concepts/RACH_Procedure_L1.md",
-      "description": "L1 랜덤 액세스 절차 (Type-1/Type-2 절차, 프리앰블 전송, RAR/MsgB 수신 및 PUSCH/PUCCH 응답 처리)",
-      "generated": true,
+      "path": "concepts/Random_Access_Procedure.md",
+      "description": "Type-1 및 Type-2 랜덤 액세스 절차 (프리앰블 전송, RAR/MsgB 수신, PUSCH/PUCCH 응답 및 경합 해결)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1635,23 +1630,9 @@
       ]
     },
     {
-      "path": "concepts/PUSCH_MsgA_Transmission.md",
-      "description": "Type-2 랜덤 액세스 절차에서의 MsgA PUSCH 전송 절차 (자원 할당, DMRS 설정, 주파수 호핑 및 유효성 판단)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "8.1A"
-          ]
-        }
-      ]
-    },
-    {
       "path": "concepts/HARQ_ACK_Codebook_Determination.md",
-      "description": "HARQ-ACK 코드북 생성 절차 (CBG 기반, Type-1/Semi-static, Type-3, 멀티캐스트/유니캐스트 HARQ-ACK 정보 처리 및 코드북 매핑)",
-      "generated": true,
+      "description": "HARQ-ACK 코드북 생성 절차 (Type-1 semi-static, CBG-based, 다중 코드북, SPS PDSCH release 및 TCI 상태 업데이트 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1667,8 +1648,8 @@
     },
     {
       "path": "concepts/PUCCH_Cell_Switching.md",
-      "description": "PUCCH-sSCell을 이용한 PUCCH 셀 스위칭 및 전송 셀 결정 절차",
-      "generated": true,
+      "description": "PUCCH-sSCell을 이용한 PUCCH 셀 스위칭 및 동적 셀 지시 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1680,37 +1661,9 @@
       ]
     },
     {
-      "path": "concepts/PUCCH_Resource_Sets.md",
-      "description": "PUCCH 자원 세트 구성, 자원 선택 절차 및 포맷별 파라미터 설정",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "9.2.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PUCCH_Spatial_Setting.md",
-      "description": "PUCCH 전송을 위한 공간 필터(Spatial domain filter) 및 빔 대응(Beam correspondence) 설정 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "9.2.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/SR_Reporting_Procedure.md",
-      "description": "스케줄링 요청(SR) 및 링크 복구 요청(LRR) 설정, 전송 기회 결정 및 PUCCH 자원 매핑 절차",
-      "generated": true,
+      "path": "concepts/Scheduling_Request_Procedure.md",
+      "description": "SR 설정, 전송 기회 결정 및 PUCCH를 통한 SR 전송 절차 (LRR 및 LBT 실패 복구 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1723,53 +1676,38 @@
       ]
     },
     {
-      "path": "concepts/UCI_Multiplexing_PUCCH.md",
-      "description": "PUCCH 내 HARQ-ACK, SR, CSI 보고의 멀티플렉싱, 우선순위 결정 및 시간 중첩 시 처리 절차",
-      "generated": true,
+      "path": "concepts/PUCCH_Spatial_Setting.md",
+      "description": "PUCCH 전송을 위한 공간 필터(Spatial domain filter) 결정 절차 (TCI 상태, SpatialRelationInfo, 빔 대응 및 RLM/BFD 연동)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "9.2.5",
-            "9.2.5.0",
-            "9.2.5.1"
+            "9.2.2"
           ]
         }
       ]
     },
     {
-      "path": "concepts/UCI_Reporting_Different_Priorities.md",
-      "description": "서로 다른 우선순위(Priority 0/1)를 가진 UCI(HARQ-ACK/SR)의 PUCCH 다중화 및 전력 제어 절차",
-      "generated": true,
+      "path": "concepts/PUCCH_UCI_Multiplexing.md",
+      "description": "PUCCH 내 HARQ-ACK, SR 및 CSI 보고 다중화 절차 (우선순위 기반 충돌 해결 및 코드북 결정)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
+            "9.2.5.2",
             "9.2.5.3"
           ]
         }
       ]
     },
     {
-      "path": "concepts/SPS_HARQ_Deferral.md",
-      "description": "SPS PDSCH에 대한 HARQ-ACK 보고 지연 및 재다중화 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "9.2.5.4"
-          ]
-        }
-      ]
-    },
-    {
       "path": "concepts/PUCCH_Repetition.md",
-      "description": "PUCCH 반복 전송(Repetition) 절차 (슬롯 기반 반복, 주파수 호핑 및 다중화 규칙)",
-      "generated": true,
+      "description": "PUCCH 반복 전송 절차 (슬롯 기반 반복, 주파수 호핑 및 공간 필터 적용)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1781,23 +1719,44 @@
       ]
     },
     {
-      "path": "concepts/UTO_UCI_Reporting.md",
-      "description": "CG-PUSCH를 통한 UTO-UCI(Uplink Transmission Opportunity) 비트맵 보고 절차",
-      "generated": true,
+      "path": "concepts/SPS_HARQ_Deferral.md",
+      "description": "SPS PDSCH 수신에 대한 HARQ-ACK 보고 지연 및 다중화 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "9.3.1"
+            "9.2.5.4"
           ]
         }
       ]
     },
     {
-      "path": "concepts/PDCCH_Monitoring_Procedures.md",
-      "description": "PDCCH 모니터링 능력(Span/Slot 기반), 검색 공간 구성 및 SS/PBCH 블록/LTE-CRS와의 자원 충돌 회피 절차",
-      "generated": true,
+      "path": "concepts/PUSCH_UCI_Multiplexing.md",
+      "description": "PUSCH 내 HARQ-ACK, CSI, CG-UCI 및 UTO-UCI 다중화 절차 (Beta-offset 설정 및 우선순위 처리)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "9.3",
+            "9.3.1"
+          ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "6.1.2.1.1"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PDCCH_Monitoring.md",
+      "description": "PDCCH 모니터링 절차 (검색 공간, CORESET, 모니터링 능력 및 SS/PBCH 블록 간섭 회피)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1809,9 +1768,9 @@
       ]
     },
     {
-      "path": "concepts/PDCCH_Validation_Procedures.md",
+      "path": "concepts/PDCCH_Validation.md",
       "description": "DL SPS, UL Grant Type 2 및 SL Configured Grant Type 2 활성화/해제를 위한 DCI 검증 절차",
-      "generated": true,
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1824,24 +1783,66 @@
       ]
     },
     {
-      "path": "concepts/PDCCH_Adaptation_Procedures.md",
-      "description": "PDCCH 모니터링 적응 절차 (SCell dormancy, 검색 공간 세트 그룹 스위칭 및 PDCCH 모니터링 스킵)",
-      "generated": true,
+      "path": "concepts/SCell_Dormancy_Behavior.md",
+      "description": "DCI 기반 SCell 휴면(Dormancy) 지시 및 BWP 전환 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "10.3",
+            "10.3"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PDCCH_Search_Space_Switching.md",
+      "description": "검색 공간 세트 그룹 스위칭 및 타이머 기반 모니터링 제어 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
             "10.4"
           ]
         }
       ]
     },
     {
-      "path": "concepts/PUSCH_HARQ_Feedback.md",
-      "description": "PUSCH 전송을 위한 DFI(Downlink Feedback Information) 기반 HARQ-ACK 정보 처리 및 유효성 판단 절차",
-      "generated": true,
+      "path": "concepts/PDCCH_Monitoring_Adaptation.md",
+      "description": "PDCCH 모니터링 적응 절차 (PDCCH 스킵, 검색 공간 그룹 스위칭, 타이머 기반 제어 및 SR/HARQ-ACK 연동)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "10.4"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Paging_Early_Indication.md",
+      "description": "DCI 포맷 2_7을 이용한 페이징 조기 지시(PEI) 및 TRS 자원 가용성 지시 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "10.4A",
+            "10.4B"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/CG_DFI_Processing.md",
+      "description": "Configured Grant PUSCH 전송에 대한 DFI(Downlink Feedback Information) 기반 HARQ-ACK 정보 수신 및 처리 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1854,37 +1855,107 @@
     },
     {
       "path": "concepts/Slot_Format_Configuration.md",
-      "description": "TDD UL-DL 슬롯 포맷 설정 및 동적/반정적 슬롯 포맷 결정 절차 (SFI, DCI format 2_0, 채널 점유 시간 및 방향 충돌 처리)",
-      "generated": true,
+      "description": "TDD UL-DL 설정(Common/Dedicated) 및 슬롯 포맷 결정 절차 (심볼 가용성, 충돌 처리 및 방향성 충돌 핸들링 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "11.1",
+            "11",
+            "11.1"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/SFI_Processing.md",
+      "description": "DCI 포맷 2_0을 이용한 슬롯 포맷 지시(SFI), 채널 점유 시간 및 가용 RB 세트 지시 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
             "11.1.1"
           ]
         }
       ]
     },
     {
-      "path": "concepts/Directional_Collision_Handling.md",
-      "description": "다중 서빙 셀 환경에서의 상향링크/하향링크 전송 방향 충돌 회피 및 우선순위 결정 절차",
-      "generated": true,
+      "path": "concepts/Interrupted_Transmission_Indication.md",
+      "description": "DCI 포맷 2_1을 이용한 전송 중단 지시(INT-RNTI) 및 자원 가용성 판단 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "11"
+            "11.2"
           ]
         }
       ]
     },
     {
-      "path": "concepts/Bandwidth_Part_Operation.md",
-      "description": "BWP 구성, 활성화/비활성화 절차, BWP inactivity timer 관리 및 DCI 기반 BWP 변경 절차",
-      "generated": true,
+      "path": "concepts/Uplink_Cancellation_Indication.md",
+      "description": "DCI 포맷 2_4를 이용한 PUSCH/SRS 전송 취소 지시(CI-RNTI) 및 우선순위 기반 취소 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "11.2A"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Group_TPC_Commands.md",
+      "description": "DCI 포맷 2_2를 이용한 PUCCH/PUSCH 그룹 TPC 명령 및 전력 제어 상태 관리 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "11.3"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/SRS_Switching.md",
+      "description": "DCI 포맷 2_3을 이용한 SRS 전송을 위한 캐리어 스위칭 및 TPC 명령 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "11.4"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Cell_DTX_DRX_Adaptation.md",
+      "description": "DCI 포맷 2_9를 이용한 셀 DTX/DRX 동작 활성화/비활성화 및 NES 모드 제어 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38213-i80.docx",
+          "sections": [
+            "11.5"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/BWP_Operation.md",
+      "description": "대역폭 파트(BWP) 설정, 활성 BWP 전환, BWP 비활성 타이머 관리 및 DCI 기반 BWP 지시 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1896,9 +1967,9 @@
       ]
     },
     {
-      "path": "entities/IAB_Node.md",
-      "description": "Integrated Access-Backhaul(IAB) 노드 개체 개요 (IAB-MT 및 IAB-DU 동작, 타이밍 모드, 자원 구성 및 가용성 지시 절차)",
-      "generated": true,
+      "path": "concepts/IAB_Operation.md",
+      "description": "IAB-MT 및 IAB-DU를 위한 통합 액세스-백홀(IAB) 동작 절차 (셀 탐색, 랜덤 액세스, 타이밍 제어, 슬롯 포맷, 자원 가용성 지시 및 전력 제어)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1910,37 +1981,9 @@
       ]
     },
     {
-      "path": "concepts/IAB_Timing_Control.md",
-      "description": "IAB-MT 전송 타이밍 모드(Case-1, 6, 7) 및 Timing Delta/Case Indication MAC CE 기반 타이밍 조정 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "14"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/IAB_Resource_Configuration.md",
-      "description": "IAB-DU 자원 구성(Hard/Soft/Unavailable), HSNA 설정 및 DCI format 2_5 기반 가용성 지시(AI) 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "14"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/DAPS_Handover_Procedures.md",
-      "description": "Dual Active Protocol Stack(DAPS) 핸드오버 절차, 셀 그룹 간 전력 제어 및 전송 충돌 회피 절차",
-      "generated": true,
+      "path": "concepts/DAPS_Handover.md",
+      "description": "DAPS(Dual Active Protocol Stack) 기반 핸드오버 절차 (소스/타겟 MCG 간 전력 공유, 전송 취소 규칙 및 자원 충돌 해결)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1952,9 +1995,9 @@
       ]
     },
     {
-      "path": "concepts/Sidelink_HARQ_Reporting.md",
+      "path": "concepts/Sidelink_HARQ_ACK_Reporting.md",
       "description": "Sidelink HARQ-ACK 정보 생성 및 상향링크(PUCCH/PUSCH) 보고 절차",
-      "generated": true,
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1967,8 +2010,8 @@
     },
     {
       "path": "concepts/Sidelink_Power_Control.md",
-      "description": "Sidelink 채널(S-SS/PSBCH, PSCCH/PSSCH, PSFCH) 전송 전력 제어 및 다중 캐리어 환경에서의 전력 우선순위 결정 절차",
-      "generated": true,
+      "description": "Sidelink 채널(S-SS/PSBCH, PSCCH/PSSCH, PSFCH) 전송 전력 제어 및 다중 캐리어 전력 공유 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1981,8 +2024,8 @@
     },
     {
       "path": "concepts/Sidelink_Resource_Conflict.md",
-      "description": "Sidelink 예약 자원 간 충돌 감지 및 Conflict 정보 보고 절차",
-      "generated": true,
+      "description": "Sidelink 자원 선택 및 센싱 절차 (Full/Partial 센싱, 자원 제외 규칙 및 LBT 실패 처리)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -1992,13 +2035,19 @@
             "16.3.0",
             "16.3.1"
           ]
+        },
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "8.1.4"
+          ]
         }
       ]
     },
     {
       "path": "concepts/Multicast_Broadcast_Services.md",
-      "description": "MBS(Multicast Broadcast Services) 관련 PDCCH/PDSCH 수신 및 HARQ-ACK 보고 절차 (G-RNTI/G-CS-RNTI, HARQ-ACK reporting modes)",
-      "generated": true,
+      "description": "MBS(Multicast Broadcast Services) 동작 절차 (PDCCH/PDSCH 수신, G-RNTI/G-CS-RNTI 관리, Multicast HARQ-ACK 보고 모드 및 코드북 생성)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2010,15 +2059,14 @@
       ]
     },
     {
-      "path": "concepts/RedCap_UE_Procedures.md",
-      "description": "RedCap(Reduced Capability) UE를 위한 L1 절차 (BWP 구성, PUCCH 자원 설정, SS/PBCH 블록 처리 및 대역폭 제한)",
-      "generated": true,
+      "path": "concepts/RedCap_UE_Operation.md",
+      "description": "RedCap(Reduced Capability) UE 동작 절차 (BWP 설정, PUCCH 자원 구성, SS/PBCH 블록 연동 및 대역폭 제한)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "17",
             "17.1",
             "17.1A"
           ]
@@ -2026,9 +2074,9 @@
       ]
     },
     {
-      "path": "concepts/Half_Duplex_UE_Operation.md",
-      "description": "Half-Duplex UE(HD-UE)의 상향링크/하향링크 전송 및 수신 충돌 회피 절차",
-      "generated": true,
+      "path": "concepts/Half_Duplex_Operation.md",
+      "description": "Half-Duplex UE(HD-UE) 동작 절차 (송수신 충돌 처리, SS/PBCH 블록 간섭 회피 및 자원 선택)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2040,23 +2088,9 @@
       ]
     },
     {
-      "path": "concepts/In_Device_Coexistence.md",
-      "description": "E-UTRA와 NR 간의 공존(In-device coexistence)을 위한 서브프레임 경계 정렬 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38213-i80.docx",
-          "sections": [
-            "16.7"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Sidelink_Transmission_Procedures.md",
-      "description": "LTE Sidelink SPS 설정 및 활성화/해제 절차 (DCI format 3_1 기반)",
-      "generated": true,
+      "path": "concepts/LTE_Sidelink_Transmission.md",
+      "description": "LTE Sidelink SPS 설정 및 전송 절차 (DCI 3_1 기반 활성화/해제)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2068,42 +2102,38 @@
       ]
     },
     {
-      "path": "concepts/PUCCH_Resource_Determination.md",
-      "description": "HARQ-ACK 정보 및 우선순위 기반 PUCCH 자원 결정 및 멀티캐스트/유니캐스트 다중화 절차",
-      "generated": true,
+      "path": "concepts/In_Device_Coexistence.md",
+      "description": "E-UTRA와 NR 간 공존을 위한 시간 분할 다중화 및 서브프레임 경계 정렬 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "9.2",
-            "9.2.1",
-            "9.2.3",
-            "9.2.5"
+            "16.7"
           ]
         }
       ]
     },
     {
-      "path": "concepts/PUSCH_Configured_Grant_Transmission.md",
-      "description": "Configured Grant(Type 1/2) 기반 PUSCH 전송 절차 (반복 전송, RV 시퀀스, SRS 리소스 세트 매핑, 슬롯 카운팅 및 공유 스펙트럼 동작)",
-      "generated": true,
+      "path": "concepts/L1_L2_Triggered_Mobility.md",
+      "description": "L1/L2-triggered mobility(LTM) 절차 (후보 셀 동기화, TCI 상태 활성화/스위칭, RACH 기반/RACH-less 셀 스위치 및 타이밍 어드밴스 적용)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
-          "file": "sources\\3gpp\\38214-i90.docx",
+          "file": "sources\\3gpp\\38213-i80.docx",
           "sections": [
-            "6.1.2.3",
-            "6.1.2.3.1",
-            "6.1.2.3.2"
+            "21",
+            "21.1"
           ]
         }
       ]
     },
     {
-      "path": "concepts/Network_Controlled_Repeater_Operation.md",
-      "description": "NCR(Network Controlled Repeater)의 제어 링크 및 백홀 링크 동작, 빔 관리, TCI 상태 및 전송/수신 타이밍 제어 절차",
-      "generated": true,
+      "path": "concepts/Network_Controlled_Repeater.md",
+      "description": "네트워크 제어 중계기(NCR) 동작 절차 (NCR-MT/NCR-Fwd 엔티티, 제어 링크/백홀 링크/액세스 링크 타이밍, 빔 지시 및 자원 관리)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2115,31 +2145,167 @@
       ]
     },
     {
-      "path": "concepts/L1_L2_Triggered_Mobility.md",
-      "description": "LTM(L1/L2-triggered mobility) 셀 스위치, TCI 상태 활성화, 측정 보고 및 RACH-less 핸드오버 절차",
-      "generated": true,
+      "path": "concepts/PDSCH_Reception_Procedure.md",
+      "description": "UE의 PDSCH 수신 절차 (HARQ 프로세스 관리, 자원 할당, TCI 상태 적용, SFN 전송 모드 및 다중 PDSCH 스케줄링 처리)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
-          "file": "sources\\3gpp\\38213-i80.docx",
+          "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "21",
-            "22",
-            "22.2"
+            "5.1",
+            "5.1.1",
+            "5.1.2",
+            "5.1.3",
+            "5.1.4",
+            "5.1.5",
+            "5.1.7"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PUSCH_Transmission_Procedure.md",
+      "description": "UE의 PUSCH 전송 절차 (전송 스킴, 자원 할당, Configured Grant, 변환 프리코딩 및 CBG 기반 전송)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "6.1",
+            "6.1.1",
+            "6.1.2",
+            "6.1.3",
+            "6.1.4",
+            "6.1.5"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/CSI_Reporting_Procedure.md",
+      "description": "CSI 보고 절차 (보고 설정, 자원 설정, 코드북 기반 PMI/CQI/RI 계산 및 보고 트리거링)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.2",
+            "5.2.1",
+            "5.2.2",
+            "5.2.3",
+            "5.2.4",
+            "5.2.5"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Uplink_Switching.md",
+      "description": "EN-DC 및 CA 환경에서의 상향링크 스위칭 절차 (다중 업링크 밴드 간 스위칭)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "6.1.6"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PUSCH_Frequency_Hopping.md",
+      "description": "PUSCH 반복 전송 타입 A/B 및 슬롯 집성 전송을 위한 주파수 호핑 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "6.3",
+            "6.3.1",
+            "6.3.2"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Downlink_Power_Control.md",
+      "description": "하향링크 전력 할당 및 EPRE 결정 절차 (SS/PBCH, CSI-RS, PDSCH 및 PT-RS 전력 오프셋)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "4.1"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/UE_Processing_Time.md",
+      "description": "PDSCH 수신 및 CSI 계산을 위한 UE 처리 시간 요구사항 및 오프셋 제한",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.3",
+            "5.4",
+            "5.5",
+            "6.4"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/Sidelink_Shared_Channel_Procedures.md",
+      "description": "PSSCH 전송 및 수신 절차 (자원 할당, 변조/코딩, 자원 선택 모드 2 및 혼잡 제어)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "8.1",
+            "8.2",
+            "8.3",
+            "8.4",
+            "8.5",
+            "8.6"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/RTT_Propagation_Delay_Compensation.md",
+      "description": "RTT 기반 전파 지연 보상을 위한 PRS 수신 및 처리 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "9",
+            "9.1"
           ]
         }
       ]
     },
     {
       "path": "concepts/PDSCH_Resource_Allocation.md",
-      "description": "PDSCH 시간 및 주파수 도메인 자원 할당 절차 (Type 0/1, 멀티캐스트/브로드캐스트 할당, PRB 번들링 포함)",
-      "generated": true,
+      "description": "PDSCH 시간 및 주파수 도메인 자원 할당 절차 (Time domain SLIV/K0, Frequency domain Type 0/1, PRB 번들링 및 다중 PDSCH 스케줄링 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "5.1.2",
             "5.1.2.1",
             "5.1.2.1.1",
             "5.1.2.2",
@@ -2152,266 +2318,69 @@
       ]
     },
     {
-      "path": "concepts/PDSCH_Transmission_Parameters.md",
-      "description": "PDSCH 변조 차수, 타겟 코드 레이트, RV 및 TB 사이즈 결정 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.1.3",
-            "5.1.3.1",
-            "5.1.3.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PDSCH_Reception_Procedures.md",
-      "description": "PDSCH 수신 시 QCL 가정, 다중 PDSCH 스케줄링, HARQ 프로세스 관리 및 처리 시간 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.1.5",
-            "5.1.6",
-            "5.1.7",
-            "5.3",
-            "5.3.1",
-            "5.5"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/CSI_Reporting_Procedures.md",
-      "description": "CSI 프레임워크, 보고 설정, 트리거링, CQI/PMI/RI 계산 및 PUSCH/PUCCH를 통한 CSI 보고 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.2",
-            "5.2.1",
-            "5.2.1.1",
-            "5.2.1.2",
-            "5.2.1.4",
-            "5.2.1.5",
-            "5.2.1.6",
-            "5.2.2",
-            "5.2.3",
-            "5.2.4",
-            "5.2.5",
-            "5.4"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PUSCH_Transmission_Procedures.md",
-      "description": "PUSCH 전송 스킴(Codebook/Non-codebook), 자원 할당(시간/주파수), Configured Grant 및 변환 프리코딩 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "6.1.1",
-            "6.1.2",
-            "6.1.3"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Sidelink_Shared_Channel_Procedures.md",
-      "description": "PSSCH 전송 및 수신 절차 (자원 할당, 변조/코딩, 자원 선택 및 혼잡 제어)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "8.1",
-            "8.1.1",
-            "8.1.2",
-            "8.1.3",
-            "8.1.4",
-            "8.1.5",
-            "8.1.6",
-            "8.1.7",
-            "8.3"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Sidelink_Reference_Signals.md",
-      "description": "Sidelink 참조 신호(CSI-RS, DM-RS, PT-RS, SL PRS) 전송 및 수신 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "8.2",
-            "8.2.1",
-            "8.2.2",
-            "8.2.3",
-            "8.2.4",
-            "8.4",
-            "8.4.1",
-            "8.4.2",
-            "8.4.3",
-            "8.4.4"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "entities/CSI_RS.md",
-      "description": "CSI 참조 신호(CSI-RS) 개체 개요 (Tracking, L1-RSRP/SINR, Mobility, NZP CSI-RS 및 TRS 구성 포함)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.1.6",
-            "5.1.6.1",
-            "5.1.6.1.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "entities/DMRS.md",
-      "description": "PDSCH용 DMRS 개체 개요 (설정, 포트 매핑, 스크램블링 및 QCL 가정 포함)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.1.6.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "entities/PT_RS.md",
-      "description": "PDSCH용 위상 추적 참조 신호(PT-RS) 개체 개요",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.1.6.3"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "entities/PRS.md",
-      "description": "포지셔닝 참조 신호(PRS) 개체 개요 (DL PRS 자원 구성, 측정 및 보고 절차 포함)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.1.6.5"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PDSCH_CBG_Transmission.md",
-      "description": "PDSCH 코드 블록 그룹(CBG) 기반 전송 절차 (CBG 그룹화, DCI 필드 해석 및 재전송 처리)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.1.7.1",
-            "5.1.7.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PRS_Measurement_Procedures.md",
-      "description": "DL PRS 측정 및 보고 절차 (측정 갭, 우선순위 결정, LoS/NLoS 지시, TEG(Timing Error Group) 관리 및 대역폭 집성 측정)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.1.6.5.1",
-            "5.1.6.5.2",
-            "5.1.6.5.3"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/CSI_Processing_Criteria.md",
-      "description": "CSI 계산을 위한 UE 처리 능력, CPU 점유 규칙 및 동시 CSI 보고 제한 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.2.1.6"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/CQI_Calculation_Procedures.md",
-      "description": "CQI 인덱스 정의, 채널/간섭 측정 제한 및 PDSCH 참조 자원 기반 CQI 도출 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "5.2.2.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PMI_Codebook_Procedures.md",
-      "description": "Type I (Single/Multi-Panel) 및 Type II (Enhanced 포함) 코드북 기반 PMI 보고 및 프리코더 제한 절차",
+      "path": "concepts/PDSCH_Transmission_Procedure.md",
+      "description": "PDSCH 수신 및 전송 절차 (전송 스킴, PDSCH 집성, TCI 상태 기반 반복 전송, FDM/TDM 스킴 및 UE 처리량 제한)",
       "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "5.2.2.2.1",
-            "5.2.2.2.2",
-            "5.2.2.2.3",
-            "5.2.2.2.4",
-            "5.2.2.2.5"
+            "5.1.1",
+            "5.1.2.1",
+            "5.1.3"
           ]
         }
-      ],
-      "failed_reason": "hallucination"
+      ]
+    },
+    {
+      "path": "concepts/PDSCH_MCS_TBS_Determination.md",
+      "description": "PDSCH 변조 차수, 타겟 코드 레이트, 리던던시 버전 및 전송 블록 크기 결정 절차",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.3"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PDSCH_Resource_Mapping.md",
+      "description": "PDSCH 물리 자원 매핑 절차 (RB/RE 레벨 레이트 매칭, SS/PBCH 블록 및 ZP CSI-RS 자원 제외)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.4",
+            "5.1.4.1",
+            "5.1.4.2"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/PDSCH_TCI_State_Management.md",
+      "description": "PDSCH 안테나 포트 준공동위치(QCL) 및 TCI 상태 설정/활성화/적용 절차 (Unified TCI, LTM, HARQ-ACK 연동)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "5.1.5"
+          ]
+        }
+      ]
     },
     {
       "path": "concepts/PUSCH_Codebook_Based_Transmission.md",
-      "description": "코드북 기반 PUSCH 전송 절차 (SRI/TPMI 기반 프리코더 결정, 다중 패널/SRS 리소스 세트 구성, 코드북 서브셋 제한 및 Full Power 전송 모드)",
-      "generated": true,
+      "description": "코드북 기반 PUSCH 전송 절차 (SRI/TPMI 결정, 다중 패널/SRS 리소스 세트 지원, Full Power 모드 및 안테나 포트 매핑)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2424,8 +2393,8 @@
     },
     {
       "path": "concepts/Scheduling_Offset_Restriction.md",
-      "description": "최소 스케줄링 오프셋(K0min, K2min) 제한 및 DCI 기반 변경 적용 절차",
-      "generated": true,
+      "description": "최소 스케줄링 오프셋(K0min, K2min) 제한 및 적용 지연(Application delay) 관리 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2437,9 +2406,9 @@
       ]
     },
     {
-      "path": "concepts/CSI_Computation_Timing.md",
-      "description": "DCI 트리거 기반 CSI 보고를 위한 UE 처리 시간 및 유효성 판단 절차",
-      "generated": true,
+      "path": "concepts/CSI_Computation_Time.md",
+      "description": "DCI 기반 CSI 보고 트리거 시 UE의 CSI 계산 및 보고 준비 시간 요구사항",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2452,8 +2421,8 @@
     },
     {
       "path": "concepts/PDSCH_Reception_Preparation_Time.md",
-      "description": "PDCCH와 PDSCH 간 서로 다른 뉴머롤로지 환경에서의 PDSCH 수신 준비 시간(Npdsch) 결정 절차",
-      "generated": true,
+      "description": "PDCCH와 PDSCH 간 서브캐리어 간격(SCS)이 다를 경우의 PDSCH 수신 준비 시간 요구사항",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2466,8 +2435,8 @@
     },
     {
       "path": "concepts/PUSCH_Resource_Allocation.md",
-      "description": "PUSCH 시간 도메인 자원 할당 절차 (Type A/B 반복 전송, TB processing over multiple slots, 슬롯 오프셋 K2, SLIV 매핑 및 가용 슬롯 카운팅)",
-      "generated": true,
+      "description": "PUSCH 시간 도메인 자원 할당 절차 (TDRA 테이블, 슬롯 오프셋 K2, SLIV, 반복 전송 K, TB 처리, 가용 슬롯 카운팅 및 최소 스케줄링 오프셋 제한)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2479,56 +2448,40 @@
       ]
     },
     {
-      "path": "concepts/PUSCH_Repetition_Procedures.md",
-      "description": "PUSCH 반복 전송 절차 (Type A/B, 다중 슬롯 TB 처리, 무효 심볼 패턴 적용, TCI 상태 연동 및 리던던시 버전(RV) 결정)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "6.1.2.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PUSCH_Transmission_Parameters.md",
-      "description": "PUSCH 변조 차수, 타겟 코드 레이트, RV 및 TB 사이즈 결정 절차 (MCS 테이블, DCI 필드 해석 및 다중 슬롯 TB 처리)",
-      "generated": true,
+      "path": "concepts/PUSCH_TBS_Determination.md",
+      "description": "PUSCH 전송 블록 크기(TBS) 결정 절차 (RE 수 계산, 레이어 수, PRB 할당 및 다중 슬롯 TB 처리 고려)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
             "6.1.4",
-            "6.1.4.1",
             "6.1.4.2"
           ]
         }
       ]
     },
     {
-      "path": "concepts/Uplink_Switching_Procedures.md",
-      "description": "상향링크 전송 스위칭 절차 (EN-DC, CA 환경에서의 스위칭 갭, 2T/1T 모드 및 다중 밴드 스위칭 제약)",
-      "generated": true,
+      "path": "concepts/PUSCH_CBG_Transmission.md",
+      "description": "코드 블록 그룹(CBG) 기반 PUSCH 전송 절차 (CBG 그룹화, CBGTI 필드 매핑 및 재전송 처리)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "6.1.6",
-            "6.1.6.1",
-            "6.1.6.2.0",
-            "6.1.6.2.2"
+            "6.1.5",
+            "6.1.5.1",
+            "6.1.5.2"
           ]
         }
       ]
     },
     {
-      "path": "concepts/DMRS_Bundling_Procedures.md",
-      "description": "PUSCH 및 PUCCH 전송을 위한 DMRS 번들링 절차 (Nominal/Actual TDW 결정, 위상 연속성 및 전력 일관성 유지 조건)",
-      "generated": true,
+      "path": "concepts/DMRS_Bundling_Procedure.md",
+      "description": "PUSCH/PUCCH 전송을 위한 DMRS 번들링 및 시간 도메인 윈도우(TDW) 결정 절차 (전력 일관성 및 위상 연속성 유지 조건 포함)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2540,9 +2493,37 @@
       ]
     },
     {
+      "path": "concepts/SRS_Frequency_Hopping.md",
+      "description": "SRS 자원 내 슬롯/심볼 단위 주파수 호핑 절차 (반복 팩터 R 및 호핑 파라미터 적용)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "6.2.1.1"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/SRS_Antenna_Switching.md",
+      "description": "DL CSI 획득을 위한 SRS 안테나 스위칭 절차 (UE 능력별 자원 세트 구성, 가드 기간 Y 및 포트 매핑)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "6.2.1.2"
+          ]
+        }
+      ]
+    },
+    {
       "path": "concepts/SRS_Carrier_Switching.md",
-      "description": "캐리어 간 SRS 스위칭 절차, RF 리튜닝 시간 관리, 캐리어 간 전송 충돌 우선순위 규칙 및 상향링크 전송 일시 중단 절차",
-      "generated": true,
+      "description": "캐리어 간 SRS 전송 절차 (RF 재튜닝 시간, 우선순위 규칙 및 충돌 처리)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
@@ -2554,149 +2535,86 @@
       ]
     },
     {
-      "path": "concepts/SRS_Collision_Handling.md",
-      "description": "SRS와 타 채널(PUCCH/PUSCH/PRACH/MsgA) 간 전송 충돌 시 우선순위 결정 및 드롭 규칙",
-      "generated": true,
+      "path": "concepts/SRS_Prioritization_Collision.md",
+      "description": "SRS 전송과 타 채널/신호 간 충돌 시 우선순위 결정 및 드롭 규칙",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "6.2.1.1",
+            "6.2.1",
             "6.2.1.3"
           ]
         }
       ]
     },
     {
-      "path": "concepts/PUSCH_DMRS_Transmission.md",
-      "description": "PUSCH DMRS 전송 절차 (DCI 포맷별 설정, CDM 그룹, 포트 매핑 및 PT-RS 연관)",
-      "generated": true,
+      "path": "concepts/SRS_Positioning_Procedure.md",
+      "description": "포지셔닝을 위한 SRS(SRS-PosResource) 설정, 공간 관계(Spatial Relation) 구성, TEG(Timing Error Group) 보고 및 RRC_INACTIVE 모드 동작 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "6.2.2"
+            "6.2.1.4"
           ]
         }
       ]
     },
     {
-      "path": "concepts/PUSCH_PTRS_Transmission.md",
-      "description": "PUSCH PT-RS 전송 절차 (변환 프리코딩 유무에 따른 밀도 결정, 포트 매핑 및 전력 제어)",
-      "generated": true,
+      "path": "concepts/SRS_Bandwidth_Aggregation.md",
+      "description": "다중 CC 간 SRS 자원 세트 연동을 통한 대역폭 집성 및 위상 연속성 유지 절차",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "6.2.3",
-            "6.2.3.1",
-            "6.2.3.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PUSCH_Frequency_Hopping.md",
-      "description": "PUSCH 주파수 호핑 절차 (Intra-slot/Inter-slot 호핑, 오프셋 설정 및 자원 할당 방식)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "6.3",
-            "6.3.1"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/PUSCH_Preparation_Time.md",
-      "description": "UE PUSCH 준비 시간(Preparation procedure time) 결정 절차 (처리 능력, 타이밍 어드밴스, BWP 스위칭, 우선순위 및 다중 TB 처리 영향)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "6.4"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Sidelink_Transmission_Parameters.md",
-      "description": "PSSCH 변조 차수, 타겟 코드 레이트, 리던던시 버전 및 전송 블록 사이즈(TBS) 결정 절차",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "8.1.3",
-            "8.1.3.1",
-            "8.1.3.2"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Sidelink_Resource_Selection.md",
-      "description": "Sidelink 리소스 할당 모드 2에서의 자원 선택 절차 (Full/Partial Sensing, 후보 자원 결정 및 우선순위 기반 자원 제외)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "8.1.4"
-          ]
-        }
-      ]
-    },
-    {
-      "path": "concepts/Sidelink_Resource_Allocation_Procedures.md",
-      "description": "PSSCH 및 SL PRS 전송을 위한 슬롯 및 자원 블록 결정 절차 (SCI format 1-A/1-B 기반 시간/주파수 자원 할당, TRIV/FRIV 매핑 및 자원 예약)",
-      "generated": true,
-      "linked": false,
-      "sources": [
-        {
-          "file": "sources\\3gpp\\38214-i90.docx",
-          "sections": [
-            "8.1.5",
-            "8.1.5A",
-            "8.2.4.2A"
+            "6.2.1.4.2"
           ]
         }
       ]
     },
     {
       "path": "concepts/Sidelink_Congestion_Control.md",
-      "description": "Sidelink 리소스 할당 모드 2에서의 혼잡 제어 절차 (CR 제한, CBR 측정 및 처리 시간 관리)",
-      "generated": true,
+      "description": "사이드링크 혼잡 제어 절차 (전용 SL PRS 자원 풀에서의 혼잡 제어 및 처리 시간 요구사항)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "8.1.6"
+            "8.2.4.3"
           ]
         }
       ]
     },
     {
-      "path": "concepts/Sidelink_Timing_Procedures.md",
-      "description": "Sidelink 예약 주기(ms)를 논리 슬롯 단위로 변환하는 절차",
-      "generated": true,
+      "path": "concepts/PSSCH_Reception_Preparation_Time.md",
+      "description": "사이드링크 PSSCH 및 PSCCH 수신 준비 시간 요구사항 (Dynamic Grant 및 Configured Grant Type 2 활성화 시점)",
+      "generated": false,
       "linked": false,
       "sources": [
         {
           "file": "sources\\3gpp\\38214-i90.docx",
           "sections": [
-            "8.1.7"
+            "8.6"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "concepts/DMRS_Reception_Procedure.md",
+      "description": "RSRP 측정을 위한 DMRS 수신 절차 (사이드링크 자원 선택 모드 2에서의 PSSCH/PSCCH RSRP 측정)",
+      "generated": false,
+      "linked": false,
+      "sources": [
+        {
+          "file": "sources\\3gpp\\38214-i90.docx",
+          "sections": [
+            "8.4.2"
           ]
         }
       ]
