@@ -64,7 +64,7 @@ def check_quality(
         logger.warning(f"Checker 파싱 실패 (시도 {attempt + 1}/3)")
 
     logger.error("Checker LLM 파싱 3회 실패 — 구조 검사 결과 사용")
-    return quick
+    return {**quick, "llm_check_failed": True}
 
 
 def _quick_check(content: str) -> dict:
@@ -240,12 +240,34 @@ def run_evaluate(
             "user_confirmed": answer == "y",
         }
 
+        if analysis.get("fix_target") != "generator":
+            logger.warning("원인이 checker 문제로 판단됨 — 재생성 없이 사용자에게 보고 후 종료")
+            print("\n[Evaluate] 원인이 generator가 아닌 checker(품질 검사 도구) 문제입니다.")
+            print(f"  root_cause: {analysis.get('root_cause')}")
+            print("  재생성 없이 종료합니다. checker 코드 또는 프롬프트를 검토하세요.")
+            history.add_round(session, before_snapshot, change={**change_record, "skipped": "checker_issue"}, after=None)
+            history.save()
+            _write_eval_log(eval_log, round_idx + 1, failed_pages, analysis)
+            break
+
         if answer != "y":
             logger.info("사용자가 재실행 거부 — Evaluate 종료")
             history.add_round(session, before_snapshot, change=change_record, after=None)
             history.save()
             _write_eval_log(eval_log, round_idx + 1, failed_pages, analysis)
             break
+
+        # ── 프롬프트 수정 ──
+        prompt_fix = analysis.get("prompt_fix", {})
+        new_content = prompt_fix.get("new_content", "").strip()
+        target = prompt_fix.get("target", "")
+        if new_content and target in ("GENERATOR_SYSTEM", "GENERATOR_USER"):
+            _apply_prompt_fix(target, new_content)
+            # 다음 라운드를 위해 프롬프트 재로드
+            generator_system, generator_user = load_prompt("generator")
+            logger.info(f"프롬프트 수정 완료: {target}")
+        else:
+            logger.warning("prompt_fix.new_content 없음 — 프롬프트 미수정 상태로 재생성")
 
         # ── 재생성 ──
         failed_paths = {fp["path"] for fp in failed_pages}
@@ -549,11 +571,29 @@ def _collect_failed_pages(
     return failed
 
 
+def _apply_prompt_fix(target: str, new_content: str) -> None:
+    """수정된 프롬프트를 sub_agents/generator.md에 반영."""
+    from wiki_builder.prompt_loader import _SUB_AGENTS_DIR, _SEPARATOR
+    md_path = _SUB_AGENTS_DIR / "generator.md"
+    current = md_path.read_text(encoding="utf-8")
+    system_part, user_part = current.split(_SEPARATOR, maxsplit=1)
+
+    if target == "GENERATOR_SYSTEM":
+        updated = new_content + _SEPARATOR + user_part
+    else:  # GENERATOR_USER
+        updated = system_part + _SEPARATOR + new_content.strip()
+
+    md_path.write_text(updated, encoding="utf-8")
+
+
 def _format_failed_summary(failed_pages: list[dict]) -> str:
     lines = []
     for fp in failed_pages:
-        issues_str = "; ".join(fp.get("issues", []))
-        lines.append(f"- {fp['path']} (점수: {fp.get('score')}) — {issues_str}")
+        if fp.get("reason") == "llm_check_failed":
+            lines.append(f"- {fp['path']} — [checker LLM 파싱 실패: 내용 평가 불가, 구조 검사만 통과]")
+        else:
+            issues_str = "; ".join(fp.get("issues", []))
+            lines.append(f"- {fp['path']} (점수: {fp.get('score')}) — {issues_str}")
     return "\n".join(lines)
 
 

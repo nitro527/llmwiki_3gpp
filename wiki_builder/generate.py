@@ -49,6 +49,7 @@ def run_generate(
     )
 
     failed: list[dict] = []
+    needs_eval: list[dict] = []
 
     if max_workers == 1:
         # 순차 처리 — rate limit 안전 모드
@@ -73,6 +74,8 @@ def run_generate(
                 else:
                     page["generated"] = True
                     page.pop("failed_reason", None)
+                    if result.get("llm_check_failed"):
+                        needs_eval.append({"path": page["path"], "reason": "llm_check_failed"})
                     _save_plan(plan, plan_path)
             except Exception as e:
                 logger.error(f"페이지 생성 예외 ({page['path']}): {e}")
@@ -107,6 +110,8 @@ def run_generate(
                     else:
                         page["generated"] = True
                         page.pop("failed_reason", None)
+                        if result.get("llm_check_failed"):
+                            needs_eval.append({"path": page["path"], "reason": "llm_check_failed"})
                         _save_plan(plan, plan_path)
                 except Exception as e:
                     logger.error(f"페이지 생성 예외 ({page['path']}): {e}")
@@ -114,7 +119,9 @@ def run_generate(
                     failed.append({"path": page["path"], "error": str(e)})
                     _save_plan(plan, plan_path)
 
-    return failed
+    if needs_eval:
+        logger.info(f"LLM 검사 실패로 evaluate 대상 추가: {len(needs_eval)}개")
+    return failed + needs_eval
 
 
 def _generate_page(
@@ -206,7 +213,7 @@ def _generate_page(
         f.write(content)
 
     logger.info(f"  저장 완료: {path} (score={result.get('score')})")
-    return {"path": path, "failed": False}
+    return {"path": path, "failed": False, "llm_check_failed": result.get("llm_check_failed", False)}
 
 
 def _detect_hallucination(text: str) -> bool:
