@@ -203,3 +203,46 @@ class TestCallSimpleInputTruncate:
         # user가 truncate되어 실제 LLM에 전달된 크기가 MAX_CONTEXT_CHARS 이하
         total = len("sys") + len(received_user['val'])
         assert total <= api_module.MAX_CONTEXT_CHARS
+
+    def test_system_alone_exceeds_limit_user_becomes_empty_string(self):
+        """system이 MAX_CONTEXT_CHARS를 초과하면 user는 빈 문자열이 되어야 한다 (음수 인덱스 방지)."""
+        received_user = {}
+
+        def capture_call(system, user, temperature, **kwargs):
+            received_user['val'] = user
+            return "ok"
+
+        # system 단독으로 한도 초과 → overflow > len(user)
+        huge_system = "s" * api_module.MAX_CONTEXT_CHARS
+        short_user = "u" * 100  # overflow가 short_user 길이보다 크다
+
+        with patch.object(api_module, '_call_claude', side_effect=capture_call):
+            result = call_simple(huge_system, short_user, backend="claude")
+
+        assert result == "ok"
+        # user는 빈 문자열이어야 하며, 음수 길이 슬라이스가 아닌 빈 문자열
+        assert received_user['val'] == ""
+
+    def test_overflow_larger_than_user_truncates_to_empty_string(self):
+        """overflow > len(user) 일 때 user는 빈 문자열이 되어야 한다.
+
+        수식: overflow = system_len + user_len - MAX
+              user[:max(0, user_len - overflow)] = user[:max(0, MAX - system_len)]
+              system_len > MAX 이면 MAX - system_len < 0 → max(0, 음수) = 0 → 빈 문자열
+        """
+        received = {}
+
+        def capture_call(system, user, temperature, **kwargs):
+            received['user'] = user
+            return "ok"
+
+        # system이 MAX를 초과 → overflow > user_len → user[:0] = ""
+        system_str = "s" * (api_module.MAX_CONTEXT_CHARS + 500)
+        user_str = "u" * 100  # 이 전부가 잘려나가야 함
+
+        with patch.object(api_module, '_call_claude', side_effect=capture_call):
+            result = call_simple(system_str, user_str, backend="claude")
+
+        assert result == "ok"
+        # 음수 인덱스 버그가 없으면 빈 문자열, 있으면 뒷부분이 반환됨
+        assert received['user'] == ""

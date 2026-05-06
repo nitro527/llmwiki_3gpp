@@ -149,6 +149,7 @@ orchestrate.py
 | Query: 페이지 선택 최대 5개 | 컨텍스트 과부하 방지 |
 | Lint: LLM에게 전체 wiki 한 번에 전달 금지 — 5페이지 묶음 단위 | 컨텍스트 과부하 방지 |
 | Post-Lint: broken_links → plan 추가 / missing_backlinks → linked 리셋 / contradictions → generated 리셋 | Lint 후 자동 복구 |
+| Post-Lint 후속: `run_generate` 실패 시 `run_link` 차단 (`_run_post_lint_followup`) | 부분 생성 상태에서 링크 걸지 않기 위해 |
 
 ---
 

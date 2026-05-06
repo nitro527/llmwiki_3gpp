@@ -7,11 +7,15 @@ test_evaluate.py — evaluate.py 단위 테스트
 - _quick_check(): 관계타입 없는 링크 감지
 - EvalHistory: new_session → add_round → close_session 흐름
 - _compute_delta(): net_fixed, avg_score_delta 계산
+- _apply_prompt_fix(): 전체 내용 기준 중복 패치 검사
+- run_evaluate(): LLM 실패 시 continue로 다음 라운드 진행
+- run_evaluate(): 파싱 실패 시 continue로 다음 라운드 진행
 """
 import json
 import sys
 from pathlib import Path
 from datetime import datetime
+from unittest.mock import patch, MagicMock
 
 import pytest
 
@@ -21,6 +25,7 @@ sys.path.insert(0, str(ROOT))
 from wiki_builder.evaluate import (
     _quick_check,
     _compute_delta,
+    _apply_prompt_fix,
     EvalHistory,
     PASS_SCORE,
 )
@@ -322,3 +327,223 @@ class TestEvalHistory:
         history.save()
         data = json.loads(path.read_text(encoding="utf-8"))
         assert len(data["sessions"]) == 2
+
+
+# ──────────────────────────────────────────────
+# _apply_prompt_fix — 중복 패치 전체 내용 비교
+# ──────────────────────────────────────────────
+
+class TestApplyPromptFix:
+    """_apply_prompt_fix의 중복 검사가 전체 내용 기준으로 동작함을 검증."""
+
+    def test_new_patch_is_written(self, tmp_path):
+        """patches.md가 없을 때 첫 패치가 저장된다."""
+        patches_path = tmp_path / "generator_patches.md"
+
+        import wiki_builder.evaluate as eval_mod
+        import wiki_builder.prompt_loader as loader_mod
+
+        with patch.object(loader_mod, '_SUB_AGENTS_DIR', tmp_path):
+            _apply_prompt_fix("GENERATOR_SYSTEM", "규칙 A: 섹션 헤더를 포함할 것")
+
+        assert patches_path.exists()
+        assert "규칙 A: 섹션 헤더를 포함할 것" in patches_path.read_text(encoding="utf-8")
+
+    def test_duplicate_patch_skipped(self, tmp_path):
+        """이미 동일 내용이 있으면 중복 저장 안 함."""
+        patches_path = tmp_path / "generator_patches.md"
+        patches_path.write_text("규칙 A: 섹션 헤더를 포함할 것", encoding="utf-8")
+
+        import wiki_builder.prompt_loader as loader_mod
+
+        with patch.object(loader_mod, '_SUB_AGENTS_DIR', tmp_path):
+            _apply_prompt_fix("GENERATOR_SYSTEM", "규칙 A: 섹션 헤더를 포함할 것")
+
+        content = patches_path.read_text(encoding="utf-8")
+        # 중복이면 PATCH 구분자가 추가되지 않아야 함
+        assert "---PATCH---" not in content
+
+    def test_prefix_match_does_not_skip(self, tmp_path):
+        """기존 패치의 앞 일부만 일치해도 전체 비교이므로 중복 아님 → 저장된다.
+
+        이전 버그(앞 100자 비교)에서는 이 케이스가 중복으로 오탐될 수 있었다.
+        현재 코드(전체 비교)에서는 전체 내용이 달라야만 새 패치로 추가된다.
+        """
+        patches_path = tmp_path / "generator_patches.md"
+        short_content = "규칙 A: 섹션 헤더를 포함할 것"
+        patches_path.write_text(short_content, encoding="utf-8")
+
+        # 기존 패치 앞부분과 같지만 더 긴 새 패치
+        longer_content = "규칙 A: 섹션 헤더를 포함할 것 — 추가 조건: 반드시 두 줄 이상 작성"
+
+        import wiki_builder.prompt_loader as loader_mod
+
+        with patch.object(loader_mod, '_SUB_AGENTS_DIR', tmp_path):
+            _apply_prompt_fix("GENERATOR_SYSTEM", longer_content)
+
+        content = patches_path.read_text(encoding="utf-8")
+        # 전체 내용이 다르므로 새 패치가 추가되어야 함
+        assert "---PATCH---" in content
+        assert longer_content in content
+
+    def test_multiple_patches_accumulated(self, tmp_path):
+        """다른 내용의 패치 2개는 각각 별도로 저장된다."""
+        patches_path = tmp_path / "generator_patches.md"
+
+        import wiki_builder.prompt_loader as loader_mod
+
+        with patch.object(loader_mod, '_SUB_AGENTS_DIR', tmp_path):
+            _apply_prompt_fix("GENERATOR_SYSTEM", "규칙 A")
+            _apply_prompt_fix("GENERATOR_SYSTEM", "규칙 B")
+
+        content = patches_path.read_text(encoding="utf-8")
+        assert "규칙 A" in content
+        assert "규칙 B" in content
+        assert content.count("---PATCH---") == 1  # 첫 번째 구분자만 (두 패치 사이)
+
+
+# ──────────────────────────────────────────────
+# run_evaluate — LLM 실패/파싱 실패 시 continue
+# ──────────────────────────────────────────────
+
+class TestRunEvaluateContinueOnError:
+    """Evaluator LLM 실패 또는 파싱 실패 시 break가 아닌 continue로 다음 라운드를 시도한다."""
+
+    def _make_plan(self, pages):
+        return {"pages": pages}
+
+    def _base_failed_page(self, path="entities/PUSCH.md"):
+        return {
+            "path": path,
+            "score": 4,
+            "issues": ["누락 섹션: 상세 설명"],
+            "reason": "low_score",
+            "content": "## 정의\n내용",
+        }
+
+    def _make_sub_agents_dir(self, tmp_path):
+        """테스트용 최소 sub_agents 디렉토리 생성 (evaluator.md, generator.md)."""
+        sub_agents_dir = tmp_path / "sub_agents"
+        sub_agents_dir.mkdir()
+        (sub_agents_dir / "evaluator.md").write_text(
+            "evaluator system\n---USER---\n{failed_pages}\n{current_prompt}\n{current_user_prompt}",
+            encoding="utf-8"
+        )
+        (sub_agents_dir / "generator.md").write_text(
+            "generator system\n---USER---\ngenerator user {spec_content} {existing_pages}",
+            encoding="utf-8"
+        )
+        return sub_agents_dir
+
+    def test_llm_failure_continues_to_next_round(self, tmp_path):
+        """첫 라운드 LLM 호출 실패 → 두 번째 라운드에서 성공 → 정상 종료."""
+        wiki_dir = tmp_path / "wiki"
+        wiki_dir.mkdir()
+        plan_path = tmp_path / "plan.json"
+        eval_log = str(tmp_path / "eval.log")
+
+        # plan에 generated=True인 페이지가 있지만 wiki_dir에 파일이 없음
+        # → _collect_failed_pages가 file_path.exists() 체크에서 skip → from_existing = []
+        page = {
+            "path": "entities/PUSCH.md",
+            "description": "PUSCH",
+            "generated": True,
+            "linked": True,
+            "sources": [],
+        }
+        plan = self._make_plan([page])
+
+        call_count = [0]
+
+        def mock_llm(system, user, **kwargs):
+            call_count[0] += 1
+            if call_count[0] == 1:
+                return "[LLM 호출 실패] 연결 오류"
+            # 두 번째 이후: fix_target=checker → break
+            return json.dumps({
+                "root_cause": "테스트",
+                "failure_pattern": "",
+                "fix_target": "checker",
+                "affected_pages": [],
+                "confidence": "high",
+            })
+
+        def mock_extract(page):
+            return "스펙 내용"
+
+        failed_pages = [self._base_failed_page()]
+
+        from wiki_builder.evaluate import run_evaluate
+        import wiki_builder.prompt_loader as loader_mod
+
+        sub_agents_dir = self._make_sub_agents_dir(tmp_path)
+
+        with patch.object(loader_mod, '_SUB_AGENTS_DIR', sub_agents_dir):
+            run_evaluate(
+                plan=plan,
+                wiki_dir=str(wiki_dir),
+                plan_path=str(plan_path),
+                eval_log=eval_log,
+                call_llm=mock_llm,
+                extract_spec_fn=mock_extract,
+                backend="claude",
+                initial_failed=failed_pages,
+            )
+
+        # LLM이 2번 이상 호출됨 = 첫 실패 후 다음 라운드로 continue했음
+        assert call_count[0] >= 2
+
+    def test_parse_failure_continues_to_next_round(self, tmp_path):
+        """첫 라운드 파싱 실패 → 두 번째 라운드에서 성공 → 정상 종료."""
+        wiki_dir = tmp_path / "wiki"
+        wiki_dir.mkdir()
+        plan_path = tmp_path / "plan.json"
+        eval_log = str(tmp_path / "eval.log")
+
+        page = {
+            "path": "entities/PUSCH.md",
+            "description": "PUSCH",
+            "generated": True,
+            "linked": True,
+            "sources": [],
+        }
+        plan = self._make_plan([page])
+
+        call_count = [0]
+
+        def mock_llm(system, user, **kwargs):
+            call_count[0] += 1
+            if call_count[0] == 1:
+                return "이것은 JSON이 아닙니다 --- broken response"
+            return json.dumps({
+                "root_cause": "테스트",
+                "failure_pattern": "",
+                "fix_target": "checker",
+                "affected_pages": [],
+                "confidence": "high",
+            })
+
+        def mock_extract(page):
+            return "스펙 내용"
+
+        failed_pages = [self._base_failed_page()]
+
+        from wiki_builder.evaluate import run_evaluate
+        import wiki_builder.prompt_loader as loader_mod
+
+        sub_agents_dir = self._make_sub_agents_dir(tmp_path)
+
+        with patch.object(loader_mod, '_SUB_AGENTS_DIR', sub_agents_dir):
+            run_evaluate(
+                plan=plan,
+                wiki_dir=str(wiki_dir),
+                plan_path=str(plan_path),
+                eval_log=eval_log,
+                call_llm=mock_llm,
+                extract_spec_fn=mock_extract,
+                backend="claude",
+                initial_failed=failed_pages,
+            )
+
+        # 파싱 실패 후 다음 라운드로 continue했음 = 2번 이상 호출
+        assert call_count[0] >= 2

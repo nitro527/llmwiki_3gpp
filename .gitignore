@@ -17,4 +17,5 @@ sources/
 
 # 에디터 / 로컬 설정
 .obsidian/
-.claude/
+.claude/*
+!.claude/agents
