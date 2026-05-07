@@ -8,7 +8,8 @@ test_generate.py — generate.py 단위 테스트
 - run_generate(): hallucination 감지 시 failed 반환
 - _generate_page(): 품질 합격 시 첫 시도에서 즉시 저장/리턴
 - _generate_page(): 품질 불합격 시 최대 QUALITY_RETRY_MAX 회 재시도
-- _generate_page(): 모든 시도 불합격 시 최고 점수 결과로 저장 후 failed=False 반환
+- _generate_page(): 모든 시도 불합격 시 failed=True 반환 (파일 저장 없음)
+- _generate_page(): check_quality_fn에 feature_hint 전달
 
 LLM 호출 mock — 실제 API 호출 없음.
 """
@@ -223,3 +224,189 @@ sources/38211.docx
                 max_workers=1,
             )
             mock_gen.assert_not_called()
+
+
+# ──────────────────────────────────────────────
+# _generate_page 직접 테스트 (품질 재시도 / feature_hint)
+# ──────────────────────────────────────────────
+
+class TestGeneratePage:
+    """_generate_page() 내부 동작 테스트."""
+
+    def _make_sub_agents_dir(self, tmp_path):
+        sub_agents_dir = tmp_path / "sub_agents"
+        sub_agents_dir.mkdir()
+        (sub_agents_dir / "generator.md").write_text(
+            "generator system\n---USER---\n"
+            "{page_path}\n{page_description}\n{feature_hint}\n{spec_content}\n{wiki_page_list}",
+            encoding="utf-8"
+        )
+        return sub_agents_dir
+
+    def _base_page(self, path="entities/PUSCH.md"):
+        return {
+            "path": path,
+            "description": "PUSCH 채널",
+            "generated": False,
+            "linked": False,
+            "sources": [{"file": "sources/38211.docx", "sections": ["6.3.1"]}],
+        }
+
+    def test_quality_retry_max_exceeded_returns_failed_true(self, tmp_path):
+        """QUALITY_RETRY_MAX 회 모두 품질 불합격 → failed=True, 파일 미생성."""
+        wiki_dir = tmp_path / "wiki"
+        wiki_dir.mkdir()
+        sub_agents_dir = self._make_sub_agents_dir(tmp_path)
+
+        page = self._base_page()
+
+        def mock_llm(system, user, **kwargs):
+            return "## 정의\n내용"
+
+        def mock_extract(p):
+            return "스펙 내용"
+
+        def always_fail_check(content, spec, call_llm_fn, **kwargs):
+            return {"score": 3, "pass": False, "issues": ["누락 섹션"]}
+
+        from wiki_builder.generate import _generate_page
+        import wiki_builder.prompt_loader as loader_mod
+        from unittest.mock import patch as _patch
+
+        with _patch.object(loader_mod, '_SUB_AGENTS_DIR', sub_agents_dir):
+            # parse_38822 모듈 모킹 (feature_hint 생성 부분)
+            with _patch('wiki_builder.generate._detect_hallucination', return_value=None):
+                with _patch('wiki_builder.generate._verify_hallucination_with_llm', return_value=False):
+                    result = _generate_page(
+                        page=page,
+                        wiki_dir=str(wiki_dir),
+                        wiki_page_list="entities/PUSCH.md",
+                        call_llm=mock_llm,
+                        extract_spec_fn=mock_extract,
+                        check_quality_fn=always_fail_check,
+                        backend="claude",
+                        feature_list=None,
+                    )
+
+        assert result["failed"] is True
+        assert "품질 기준 미달" in result.get("reason", "")
+        # 파일이 생성되지 않아야 함
+        assert not (wiki_dir / "entities" / "PUSCH.md").exists()
+
+    def test_quality_pass_on_first_attempt_saves_file(self, tmp_path):
+        """첫 시도 품질 합격 → 파일 저장 후 failed=False."""
+        wiki_dir = tmp_path / "wiki"
+        wiki_dir.mkdir()
+        sub_agents_dir = self._make_sub_agents_dir(tmp_path)
+
+        page = self._base_page()
+        good_content = "## 정의\nPUSCH 채널"
+
+        def mock_llm(system, user, **kwargs):
+            return good_content
+
+        def mock_extract(p):
+            return "스펙"
+
+        def passing_check(content, spec, call_llm_fn, **kwargs):
+            return {"score": 8, "pass": True, "issues": []}
+
+        from wiki_builder.generate import _generate_page
+        import wiki_builder.prompt_loader as loader_mod
+        from unittest.mock import patch as _patch
+
+        with _patch.object(loader_mod, '_SUB_AGENTS_DIR', sub_agents_dir):
+            with _patch('wiki_builder.generate._detect_hallucination', return_value=None):
+                with _patch('wiki_builder.generate._verify_hallucination_with_llm', return_value=False):
+                    result = _generate_page(
+                        page=page,
+                        wiki_dir=str(wiki_dir),
+                        wiki_page_list="entities/PUSCH.md",
+                        call_llm=mock_llm,
+                        extract_spec_fn=mock_extract,
+                        check_quality_fn=passing_check,
+                        backend="claude",
+                        feature_list=None,
+                    )
+
+        assert result["failed"] is False
+        assert (wiki_dir / "entities" / "PUSCH.md").exists()
+
+    def test_feature_hint_forwarded_to_check_quality_fn(self, tmp_path):
+        """feature_list가 없을 때도 check_quality_fn에 feature_hint 키워드 인자가 전달된다."""
+        wiki_dir = tmp_path / "wiki"
+        wiki_dir.mkdir()
+        sub_agents_dir = self._make_sub_agents_dir(tmp_path)
+
+        page = self._base_page()
+        received_kwargs = {}
+
+        def mock_llm(system, user, **kwargs):
+            return "## 정의\n내용"
+
+        def mock_extract(p):
+            return "스펙"
+
+        def capturing_check(content, spec, call_llm_fn, **kwargs):
+            received_kwargs.update(kwargs)
+            return {"score": 8, "pass": True, "issues": []}
+
+        from wiki_builder.generate import _generate_page
+        import wiki_builder.prompt_loader as loader_mod
+        from unittest.mock import patch as _patch
+
+        with _patch.object(loader_mod, '_SUB_AGENTS_DIR', sub_agents_dir):
+            with _patch('wiki_builder.generate._detect_hallucination', return_value=None):
+                with _patch('wiki_builder.generate._verify_hallucination_with_llm', return_value=False):
+                    _generate_page(
+                        page=page,
+                        wiki_dir=str(wiki_dir),
+                        wiki_page_list="",
+                        call_llm=mock_llm,
+                        extract_spec_fn=mock_extract,
+                        check_quality_fn=capturing_check,
+                        backend="claude",
+                        feature_list=None,
+                    )
+
+        # feature_hint 키워드가 check_quality_fn에 전달되어야 함
+        assert "feature_hint" in received_kwargs
+
+    def test_quality_retry_count_equals_quality_retry_max(self, tmp_path):
+        """항상 불합격일 때 check_quality_fn 호출 횟수가 정확히 QUALITY_RETRY_MAX번이다."""
+        wiki_dir = tmp_path / "wiki"
+        wiki_dir.mkdir()
+        sub_agents_dir = self._make_sub_agents_dir(tmp_path)
+
+        page = self._base_page()
+        check_call_count = [0]
+
+        def mock_llm(system, user, **kwargs):
+            return "## 정의\n내용"
+
+        def mock_extract(p):
+            return "스펙"
+
+        def counting_check(content, spec, call_llm_fn, **kwargs):
+            check_call_count[0] += 1
+            return {"score": 4, "pass": False, "issues": ["낮은 점수"]}
+
+        from wiki_builder.generate import _generate_page, QUALITY_RETRY_MAX
+        import wiki_builder.prompt_loader as loader_mod
+        from unittest.mock import patch as _patch
+
+        with _patch.object(loader_mod, '_SUB_AGENTS_DIR', sub_agents_dir):
+            with _patch('wiki_builder.generate._detect_hallucination', return_value=None):
+                with _patch('wiki_builder.generate._verify_hallucination_with_llm', return_value=False):
+                    _generate_page(
+                        page=page,
+                        wiki_dir=str(wiki_dir),
+                        wiki_page_list="",
+                        call_llm=mock_llm,
+                        extract_spec_fn=mock_extract,
+                        check_quality_fn=counting_check,
+                        backend="claude",
+                        feature_list=None,
+                    )
+
+        assert check_call_count[0] == QUALITY_RETRY_MAX

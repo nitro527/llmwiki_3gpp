@@ -40,12 +40,14 @@ Karpathy LLM Wiki 패턴 구현체. 원문: `KARPATHY_LLMWIKI.md`
 
 ```python
 # 환경변수로 백엔드 전환
-BACKEND = os.getenv("WIKI_BACKEND", "gemini")  # "claude" | "gptoss" | "gemini"
+BACKEND = os.getenv("WIKI_BACKEND", "gptoss")  # "claude" | "gptoss" | "gemini"
 
 def call_simple(system: str, user: str, **kwargs) -> str:
     # 실패 시 반드시 "[LLM 호출 실패] ..." 형태로 반환
     # 예외를 raise하지 말 것
 ```
+
+- `max_tokens` 기본값: 16384 (모든 백엔드 공통)
 
 **Claude 백엔드:**
 - 모델: `claude-sonnet-4-5` 이상
@@ -53,7 +55,9 @@ def call_simple(system: str, user: str, **kwargs) -> str:
 - temperature: 0.1 (Planner/Checker), 0.3 (Generator)
 
 **gpt-oss 백엔드:**
-- URL: `http://apigw-stg.samsungds.net:8000/gpt-oss/1/gpt-oss-120b/v1/chat/completions`
+- URL: `http://apigw-stg.samsungds.net:8000/gpt-oss/1/openai/gpt-oss-120b/v1/chat/completions`
+- 모델명: `"openai/gpt-oss-120b"`
+- 인증 헤더: `x-dep-ticket` (Bearer 방식 아님), `Send-System-Name: Tracer`, `User-Id`, `User-Type`
 - proxies: `{"http": None, "https": None}` 필수
 - timeout: 300
 
@@ -141,6 +145,9 @@ orchestrate.py
 | Post-Plan: 코드 검증(중복 섹션) + LLM 검증(의미적 불일치) | plan 품질 보장 |
 | Generator: 입력에 섹션 내용 + `path: description` 목록 전달 | 컨텍스트 과부하 방지 |
 | Generator: hallucination 감지 후 저장 (3어절 5회 반복 → 차단) | 품질 보장 |
+| Generator: QUALITY_RETRY_MAX 초과 시 `failed=True` 처리 → Evaluator로 넘김 (최고점수 저장 방식 폐기) | 불량 페이지 generated=True 방지 |
+| evaluate.py `check_quality()`: content/spec_content 전체 전달 (잘라서 전달 방식 폐기), `feature_hint` 파라미터 추가 | 평가 정확도 향상 |
+| plan.py: LLM 재시도 루프를 `run_plan`의 `while True`로 올림, 불완전 JSON 복구 로직 포함 | max_tokens 잘림 대응 |
 | plan.json 절대 삭제 금지 — generated/linked/post_plan_done 플래그로 재개 | 체크포인트 |
 | LLM 호출 실패: 최대 3회 재시도, exponential backoff (5→10→20초) | 안정성 |
 | 429: 65초 대기 후 재시도 (MAX_RETRIES 카운트 제외) | Rate limit 처리 |

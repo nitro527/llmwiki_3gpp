@@ -547,3 +547,89 @@ class TestRunEvaluateContinueOnError:
 
         # 파싱 실패 후 다음 라운드로 continue했음 = 2번 이상 호출
         assert call_count[0] >= 2
+
+
+# ──────────────────────────────────────────────
+# check_quality — feature_hint 파라미터 전달
+# ──────────────────────────────────────────────
+
+class TestCheckQualityFeatureHint:
+    """check_quality()가 feature_hint를 LLM user_msg에 포함시켜 전달한다."""
+
+    def _make_sub_agents_dir(self, tmp_path):
+        sub_agents_dir = tmp_path / "sub_agents"
+        sub_agents_dir.mkdir()
+        (sub_agents_dir / "checker.md").write_text(
+            "checker system\n---USER---\n"
+            "{page_content}\n{spec_content}\n{feature_hint}",
+            encoding="utf-8"
+        )
+        return sub_agents_dir
+
+    def test_feature_hint_passed_to_llm(self, tmp_path):
+        """feature_hint가 LLM에 전달되는 user_msg에 포함되어야 한다."""
+        sub_agents_dir = self._make_sub_agents_dir(tmp_path)
+        received = {}
+
+        def capture_llm(system, user, **kwargs):
+            received['user'] = user
+            return '{"score": 8, "pass": true, "issues": []}'
+
+        from wiki_builder.evaluate import check_quality
+        import wiki_builder.prompt_loader as loader_mod
+
+        with patch.object(loader_mod, '_SUB_AGENTS_DIR', sub_agents_dir):
+            result = check_quality(
+                content="## 정의\n내용",
+                spec_content="스펙 내용",
+                call_llm=capture_llm,
+                backend="claude",
+                feature_hint="Feature: PUSCH power control",
+            )
+
+        assert "Feature: PUSCH power control" in received.get('user', '')
+
+    def test_empty_feature_hint_still_works(self, tmp_path):
+        """feature_hint가 빈 문자열이어도 정상 동작한다."""
+        sub_agents_dir = self._make_sub_agents_dir(tmp_path)
+
+        def mock_llm(system, user, **kwargs):
+            return '{"score": 7, "pass": false, "issues": ["테스트 이슈"]}'
+
+        from wiki_builder.evaluate import check_quality
+        import wiki_builder.prompt_loader as loader_mod
+
+        with patch.object(loader_mod, '_SUB_AGENTS_DIR', sub_agents_dir):
+            result = check_quality(
+                content="## 정의\n내용",
+                spec_content="스펙",
+                call_llm=mock_llm,
+                backend="claude",
+                feature_hint="",
+            )
+
+        assert result["score"] == 7
+        assert result["pass"] is False
+
+    def test_llm_failure_returns_quick_check_result(self, tmp_path):
+        """LLM 실패 시 quick_check 결과를 반환한다."""
+        sub_agents_dir = self._make_sub_agents_dir(tmp_path)
+
+        def failing_llm(system, user, **kwargs):
+            return "[LLM 호출 실패] 연결 오류"
+
+        from wiki_builder.evaluate import check_quality
+        import wiki_builder.prompt_loader as loader_mod
+
+        with patch.object(loader_mod, '_SUB_AGENTS_DIR', sub_agents_dir):
+            result = check_quality(
+                content="## 정의\n내용",
+                spec_content="스펙",
+                call_llm=failing_llm,
+                backend="claude",
+                feature_hint="hint",
+            )
+
+        # LLM 실패 시 quick_check 결과 — method 키 확인
+        assert "score" in result
+        assert "pass" in result

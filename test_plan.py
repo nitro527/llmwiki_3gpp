@@ -357,3 +357,45 @@ class TestRunPlanMultiSourceMerge:
 
         pusch = next(p for p in result["pages"] if p["path"] == "entities/PUSCH.md")
         assert len(pusch["description"]) > len("짧은 설명")
+
+
+# ──────────────────────────────────────────────
+# _parse_planner_response — 불완전 JSON 복구 (step 3)
+# ──────────────────────────────────────────────
+
+class TestParsePlannerResponseIncompleteJson:
+    """max_tokens로 잘린 JSON 배열도 복구할 수 있어야 한다."""
+
+    def test_truncated_json_array_recovered(self):
+        """마지막 객체가 잘려도 완성된 객체들은 복구된다."""
+        # 완전한 객체 2개 + 잘린 3번째 객체
+        raw = (
+            '[{"path": "entities/PUSCH.md", "description": "PUSCH 설명", "sections": ["6.1"]}, '
+            '{"path": "entities/PDSCH.md", "description": "PDSCH 설명", "sections": ["7.1"]}, '
+            '{"path": "entities/UCI.md", "description": "UCI 설'  # 잘림
+        )
+        result = _parse_planner_response(raw, "sources/38211.docx")
+        # 완성된 객체 2개는 반환되어야 한다
+        assert result is not None
+        assert len(result) == 2
+        paths = [p["path"] for p in result]
+        assert "entities/PUSCH.md" in paths
+        assert "entities/PDSCH.md" in paths
+
+    def test_truncated_single_valid_object_recovered(self):
+        """완성된 객체 1개 + 잘린 나머지 → 완성 객체 1개 반환."""
+        raw = (
+            '[{"path": "entities/PUSCH.md", "description": "PUSCH 채널", "sections": []}, '
+            '{"path": "entities/PDSCH.md", "description": "PDSc'  # 잘림
+        )
+        result = _parse_planner_response(raw, "sources/38211.docx")
+        assert result is not None
+        assert len(result) == 1
+        assert result[0]["path"] == "entities/PUSCH.md"
+
+    def test_completely_broken_no_complete_object_returns_none(self):
+        """완성된 객체가 하나도 없이 완전히 잘린 경우 None 반환."""
+        raw = '[{"path": "entities/PUSCH.md", "desc'  # 첫 객체도 미완성
+        result = _parse_planner_response(raw, "sources/38211.docx")
+        # rfind('},') 가 -1이므로 복구 불가 → None
+        assert result is None
