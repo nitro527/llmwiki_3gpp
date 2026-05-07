@@ -10,21 +10,16 @@
 {
   "root_cause": "관련 개념 섹션에 관계 타입이 누락되는 패턴",
   "fix_target": "generator",
+  "failure_pattern": "관련 개념 링크를 - [[X]] 형태로만 작성하고 (affects) 등 관계 타입을 붙이지 않음",
   "affected_pages": ["entities/PUSCH.md", "entities/DMRS.md"],
-  "prompt_fix": {
-    "target": "GENERATOR_SYSTEM",
-    "new_content": "...수정된 프롬프트 전문 (현재 프롬프트를 기반으로 문제 부분만 고친 전체 텍스트)..."
-  },
   "confidence": "high"
 }
 ```
 
-## prompt_fix 작성 규칙
-- `target`: `"GENERATOR_SYSTEM"` 또는 `"GENERATOR_USER"` 중 하나
-- `new_content`: 현재 프롬프트 전문을 기반으로 문제 부분만 수정한 **완전한 새 프롬프트 텍스트**
-  - 기존 내용을 최대한 유지하고 문제된 부분만 최소 수정
-  - `---USER---` 구분자, `{변수명}` 플레이스홀더는 절대 건드리지 말 것
-  - `fix_target`이 `"generator"`가 아니면 `prompt_fix`는 생략해도 됨
+## 필드 작성 규칙
+- `failure_pattern`: 실패의 구체적인 패턴을 1-2문장으로 기술. 어떤 형식으로 잘못 작성되었는지 명확히.
+  - `fix_target`이 `"generator"`가 아니면 생략 가능
+- 프롬프트 수정은 이 에이전트의 역할이 아님 — 원인 분석에만 집중
 
 ---USER---
 
