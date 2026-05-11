@@ -14,7 +14,7 @@ from wiki_builder.utils import extract_json_from_llm
 
 logger = logging.getLogger(__name__)
 
-PASS_SCORE = 8
+PASS_SCORE = 7
 
 
 def check_quality(

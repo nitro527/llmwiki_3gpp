@@ -34,6 +34,7 @@
 ## 관계 타입 (관련 개념 섹션에서만 사용)
 affects / depends_on / triggers / part_of / similar_to / implements
 이 6개만 유효. 반드시 괄호 형식: `- [[Slot]] (part_of)`
+**절대 금지**: `- [[Slot]] (part_of): 설명...` — 괄호 뒤에 콜론이나 설명 텍스트 추가 금지.
 모든 항목에 관계 타입 필수 — 하나라도 누락 시 감점.
 
 ## wikilink 규칙
