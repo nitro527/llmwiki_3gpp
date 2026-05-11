@@ -17,8 +17,6 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
-ROOT = Path(__file__).parent
-sys.path.insert(0, str(ROOT))
 
 import wiki_builder.api as api_module
 from wiki_builder.api import truncate_content, call_simple, _RateLimitError, _RetryableError

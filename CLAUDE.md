@@ -182,6 +182,8 @@ orchestrate.py
 
 Evaluator가 프롬프트를 개선할 때도 해당 `sub_agents/*.md` 파일을 재작성한다.
 
+**프롬프트 변수 추가 시 주의:** `sub_agents/*.md`의 `{변수명}` placeholder와 해당 `format(변수명=...)` 호출을 반드시 동시에 추가. 불일치 시 KeyError 발생.
+
 ---
 
 ## 구현 시 참고
@@ -190,6 +192,8 @@ Evaluator가 프롬프트를 개선할 때도 해당 `sub_agents/*.md` 파일을
 - 섹션 추출: `\n{섹션번호}\t` 패턴으로 시작점 찾고 다음 같은 레벨 헤더까지
 - 약어 추출: `\n3.3\t` 두 번째 매치에서 시작, `\n4\t`까지
 - 3GPP spec 청킹: 섹션 경계 우선, MIN_CHUNK=40000자, MAX_CHUNK=50000자
+- **backend 파라미터 규칙:** 모든 phase 함수의 `backend` 기본값은 `None`. 본문 첫 줄에서 `import wiki_builder.api; backend = backend or wiki_builder.api.BACKEND`로 런타임 해결. `WIKI_BACKEND` env가 단일 소스.
+- **Windows 출력 주의:** `print()`에서 em-dash(`—`, U+2014) 사용 금지 → cp949 UnicodeEncodeError. 하이픈(`-`) 사용.
 
 ---
 

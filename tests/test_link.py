@@ -13,8 +13,6 @@ from unittest.mock import patch
 
 import pytest
 
-ROOT = Path(__file__).parent
-sys.path.insert(0, str(ROOT))
 
 from wiki_builder.link import _build_link_map, run_link
 

@@ -21,8 +21,6 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
-ROOT = Path(__file__).parent
-sys.path.insert(0, str(ROOT))
 
 from wiki_builder.generate import _detect_hallucination, run_generate, QUALITY_RETRY_MAX
 

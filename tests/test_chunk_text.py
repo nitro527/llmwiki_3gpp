@@ -14,10 +14,8 @@ from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).parent
-sys.path.insert(0, str(ROOT))
 
-from chunk_text import (
+from wiki_builder.chunk_text import (
     find_chunk_boundary,
     chunk_file,
     read_file_content,
