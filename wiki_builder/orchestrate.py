@@ -455,7 +455,7 @@ def _run_orchestrator(args, call_llm, user_message: str = None):
             elif name == "run_generate":
                 from wiki_builder.generate import run_generate
                 from wiki_builder.evaluate import run_evaluate
-from wiki_builder.quality import check_quality
+                from wiki_builder.quality import check_quality
                 plan = _load_plan()
                 if not plan:
                     return "[오류] plan.json 없음. run_plan을 먼저 실행하세요."
